@@ -1063,7 +1063,7 @@ footer {
   position: relative;
   overflow: hidden;
   padding: 1.4rem 0;
-  background: transparent;
+  background: var(--surface);
 }
 
 .marquee-band {
@@ -1074,7 +1074,6 @@ footer {
   background: var(--gradient-full);
   background-size: 200% auto;
   animation: marqueeGradientShift 8s linear infinite;
-  box-shadow: 0 20px 60px rgba(37, 99, 235, 0.28);
   overflow: hidden;
 }
 
