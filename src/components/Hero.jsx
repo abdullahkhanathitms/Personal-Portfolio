@@ -47,12 +47,13 @@ export default function Hero() {
           <motion.h1 variants={item}>
             Hi, I'm <span className="text-gradient hero-cursor">{typedName}</span>
             <br />
-            I build &amp; optimize responsive interfaces
+            I build &amp; optimize
+            <br />
+            full-stack web apps
           </motion.h1>
 
           <motion.p variants={item} className="hero-lede">
-            WordPress &amp; Front-End Developer crafting fast, responsive
-            websites for real estate, eCommerce and corporate brands.
+            Full-Stack &amp; CMS Developer crafting fast, responsive web apps and websites.
           </motion.p>
 
           <motion.div variants={item} className="hero-actions">
@@ -86,6 +87,7 @@ export default function Hero() {
       <a href="#about" className="hero-scroll" aria-label="Scroll to About section">
         <span></span>
       </a>
+      <div className="hero-bottom-fade" aria-hidden="true"></div>
     </section>
   )
 }

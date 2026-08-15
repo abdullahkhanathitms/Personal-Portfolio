@@ -2,39 +2,34 @@ import Reveal from './Reveal'
 
 const SERVICES = [
   {
-    icon: 'fa-brands fa-wordpress',
-    title: 'WordPress Development',
-    text: 'Custom WordPress builds with Elementor Pro — landing pages, corporate sites and content-managed platforms clients can update themselves.',
-  },
-  {
-    icon: 'fa-solid fa-laptop-code',
-    title: 'Front-End Development',
-    text: 'Responsive, cross-browser interfaces built with HTML5, CSS3, Bootstrap and JavaScript, with React where a project needs it.',
-  },
-  {
-    icon: 'fa-solid fa-cart-shopping',
-    title: 'eCommerce Solutions',
-    text: 'WooCommerce storefronts — product catalogs, payment integration and checkout flows built to convert.',
-  },
-  {
-    icon: 'fa-solid fa-gauge-high',
-    title: 'Optimization & Maintenance',
-    text: 'Page-speed tuning, SEO fundamentals and ongoing website maintenance so a site stays fast, secure and easy to find.',
+    icon: 'fa-solid fa-layer-group',
+    title: 'Full-Stack Web Development',
+    text: 'Scalable web applications built with React, Node.js, Express, MongoDB and PHP — fast, secure, and tailored for modern digital products.',
   },
   {
     icon: 'fa-brands fa-webflow',
-    title: 'Webflow Development',
-    text: 'Visually-built, clean-code websites on Webflow — a strong fit for design-forward landing pages and marketing sites that need to launch fast.',
-  },
-  {
-    icon: 'fa-solid fa-bolt',
-    title: 'Framer Websites',
-    text: 'Interactive, animation-rich sites built in Framer — great for portfolios, product launches and brands that want motion done well.',
+    title: 'WordPress & Webflow CMS',
+    text: 'Custom WordPress & Webflow sites with Elementor Pro and Framer — design-forward, responsive marketing sites and client-editable portals.',
   },
   {
     icon: 'fa-brands fa-shopify',
-    title: 'Shopify Stores',
-    text: 'Shopify storefronts set up to actually sell — product setup, theme customization and a checkout flow tailored to the brand.',
+    title: 'Shopify & eCommerce Stores',
+    text: 'High-converting Shopify storefronts and WooCommerce builds — product management, custom payment gateways, and optimized checkout flows.',
+  },
+  {
+    icon: 'fa-solid fa-network-wired',
+    title: 'REST API & Backend Services',
+    text: 'Custom RESTful API development, backend microservices, authentication systems, and seamless third-party API integrations.',
+  },
+  {
+    icon: 'fa-solid fa-database',
+    title: 'Database Architecture & Management',
+    text: 'Data modeling, schema design, and query optimization for MongoDB, MySQL, and PostgreSQL databases ensuring high data integrity.',
+  },
+  {
+    icon: 'fa-solid fa-gauge-high',
+    title: 'Performance & SEO Optimization',
+    text: 'Speed tuning, Core Web Vitals optimization, technical SEO fundamentals, and site security maintenance so websites load fast and rank well.',
   },
 ]
 
@@ -45,7 +40,7 @@ export default function Services() {
         <Reveal className="section-header center" as="div">
           <div className="eyebrow" style={{ justifyContent: 'center' }}>How I Can Help</div>
           <h2>Services</h2>
-          <p>From first build to ongoing upkeep — real estate, eCommerce and corporate teams work with me for the full lifecycle of a website.</p>
+          <p>End-to-end digital solutions — from full-stack web applications and custom CMS builds to robust backend APIs and database design.</p>
         </Reveal>
 
         <div className="services-grid">

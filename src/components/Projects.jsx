@@ -3,17 +3,15 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Reveal from './Reveal'
 import { useGithubRepos } from '../hooks/useGithubRepos'
 import { GITHUB_USER } from '../data/socials'
-import { PERSONAL_PORTFOLIO, CERTIFICATES } from '../data/showcase'
+import { PERSONAL_PORTFOLIO, CERTIFICATES, LOR_ITEMS } from '../data/showcase'
 
-// Real client work — these are live production sites built at Brixq Software
-// House rather than public repos, so they're curated here with proper writeups.
 const FEATURED_PROJECTS = [
   {
     id: 'featured-real-estate',
     name: 'Singapore Real Estate Websites',
     description:
       'A set of property-listing websites built for the Singapore real estate market — structured listing pages, lead-capture forms and dedicated landing pages designed around one goal: turning visitors into qualified enquiries.',
-    tags: ['WordPress', 'Elementor Pro', 'Lead Generation'],
+    tags: ['WordPress', 'Webflow', 'Elementor Pro', 'Lead Generation'],
     liveUrl: 'https://savewithproperty.sg',
     icon: 'fa-solid fa-house-chimney',
   },
@@ -30,14 +28,13 @@ const FEATURED_PROJECTS = [
     id: 'featured-corporate',
     name: 'Peshawar Zalmi — Corporate Website',
     description:
-      'A performance-focused corporate website built with WordPress and Framer, balancing a strong brand identity with fast load times and a consistent experience across every device.',
-    tags: ['WordPress', 'Framer', 'Corporate'],
+      'A performance-focused corporate website built with WordPress, Webflow and Framer, balancing a strong brand identity with fast load times and a consistent experience across every device.',
+    tags: ['WordPress', 'Webflow', 'Framer', 'Corporate'],
     liveUrl: 'https://peshawarzalmi.com',
     icon: 'fa-solid fa-building',
   },
 ]
 
-// Fallback descriptions for repos that ship without one on GitHub.
 const REPO_DESCRIPTIONS = {
   Team_Python: 'A collaborative Python project focused on applying core programming logic through team-based problem solving.',
   'ids-interview-platform': 'A front-end interview-platform interface built with structured, maintainable CSS for a clean, usable layout.',
@@ -47,6 +44,7 @@ const TABS = [
   { id: 'projects', label: 'Projects', icon: 'fa-solid fa-diagram-project' },
   { id: 'portfolio', label: 'Personal Portfolio', icon: 'fa-brands fa-wordpress' },
   { id: 'certificates', label: 'Certificates', icon: 'fa-solid fa-certificate' },
+  { id: 'lor', label: 'LOR & Recommendation', icon: 'fa-solid fa-award' },
 ]
 
 function getLangIcon(lang) {
@@ -177,7 +175,7 @@ function PortfolioPanel() {
           ) : (
             <div className="portfolio-preview-placeholder">
               <i className="fa-brands fa-wordpress"></i>
-              <span>Add a screenshot of your site here</span>
+              <span>WordPress &amp; Webflow Live Portfolio</span>
             </div>
           )}
           <div className="portfolio-browser-bar">
@@ -206,24 +204,32 @@ function PortfolioPanel() {
   )
 }
 
-function CertificatesPanel() {
+function ImageCertCard({ item, onSelect }) {
+  return (
+    <div className="cert-image-card glass" onClick={() => onSelect(item)}>
+      <div className="cert-image-wrap">
+        <img src={item.image} alt={item.title} />
+        <div className="cert-image-overlay">
+          <span className="cert-zoom-btn">
+            <i className="fa-solid fa-magnifying-glass-plus"></i> View Full
+          </span>
+        </div>
+      </div>
+      <div className="cert-card-caption">
+        <h4>{item.title}</h4>
+        <span className="cert-card-sub">{item.issuer} &middot; {item.date}</span>
+      </div>
+    </div>
+  )
+}
+
+function CertificatesPanel({ onSelect }) {
   return (
     <motion.div {...panelMotion}>
-      <div className="certificates-grid">
+      <div className="cert-showcase-grid">
         {CERTIFICATES.map((cert, i) => (
-          <Reveal key={cert.id} delay={i * 0.08} className="certificate-card glass">
-            <div className="certificate-badge">
-              {cert.image ? (
-                <img src={cert.image} alt={cert.title} />
-              ) : (
-                <i className="fa-brands fa-microsoft"></i>
-              )}
-            </div>
-            <h3>{cert.title}</h3>
-            <p className="certificate-issuer">{cert.issuer} &middot; {cert.date}</p>
-            <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" className="project-link primary">
-              View Credential <i className="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+          <Reveal key={cert.id} delay={i * 0.08}>
+            <ImageCertCard item={cert} onSelect={onSelect} />
           </Reveal>
         ))}
       </div>
@@ -231,16 +237,81 @@ function CertificatesPanel() {
   )
 }
 
+function LorPanel({ onSelect }) {
+  return (
+    <motion.div {...panelMotion}>
+      <div className="cert-showcase-grid">
+        {LOR_ITEMS.map((lor, i) => (
+          <Reveal key={lor.id} delay={i * 0.08}>
+            <ImageCertCard item={lor} onSelect={onSelect} />
+          </Reveal>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
+function CertModal({ item, onClose }) {
+  if (!item) return null
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="cert-modal-backdrop"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <motion.div
+          className="cert-modal-content glass"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="cert-modal-close" onClick={onClose} aria-label="Close modal">
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+
+          <div className="cert-modal-body">
+            <div className="cert-modal-img-wrap">
+              <img src={item.image} alt={item.title} className="cert-modal-img" />
+            </div>
+            <div className="cert-modal-meta">
+              <h3>{item.title}</h3>
+              <p className="cert-modal-issuer">{item.issuer} &middot; {item.date}</p>
+              {item.description && <p className="cert-modal-desc">{item.description}</p>}
+              {item.credentialUrl && (
+                <a
+                  href={item.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  style={{ marginTop: '1rem' }}
+                >
+                  Verify Credential <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  )
+}
+
 export default function Projects() {
   const [activeTab, setActiveTab] = useState('projects')
+  const [selectedItem, setSelectedItem] = useState(null)
 
   return (
     <section id="projects">
       <div className="container">
         <Reveal className="section-header center" as="div">
           <div className="eyebrow" style={{ justifyContent: 'center' }}>Selected Work</div>
-          <h2>Featured Projects</h2>
-          <p>Client websites, my own WordPress portfolio, and certifications — all in one place.</p>
+          <h2>Featured Work &amp; Credentials</h2>
+          <p>Full-Stack projects, WordPress &amp; Webflow builds, official certifications, and recommendation letters.</p>
         </Reveal>
 
         <div className="tabs-bar" role="tablist" aria-label="Projects section tabs">
@@ -261,8 +332,13 @@ export default function Projects() {
         <AnimatePresence mode="wait">
           {activeTab === 'projects' && <ProjectsPanel key="projects" />}
           {activeTab === 'portfolio' && <PortfolioPanel key="portfolio" />}
-          {activeTab === 'certificates' && <CertificatesPanel key="certificates" />}
+          {activeTab === 'certificates' && <CertificatesPanel key="certificates" onSelect={setSelectedItem} />}
+          {activeTab === 'lor' && <LorPanel key="lor" onSelect={setSelectedItem} />}
         </AnimatePresence>
+
+        {selectedItem && (
+          <CertModal item={selectedItem} onClose={() => setSelectedItem(null)} />
+        )}
       </div>
     </section>
   )

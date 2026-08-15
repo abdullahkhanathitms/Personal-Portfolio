@@ -6,9 +6,9 @@ import { SOCIALS } from '../data/socials'
 // account. Replace with your own Public Key / Service ID / Template ID from
 // https://dashboard.emailjs.com before deploying, or the form won't send
 // mail to you. The form UI and submit logic below are otherwise unchanged.
-const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY'
-const EMAILJS_SERVICE_ID = 'YOUR_EMAILJS_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID'
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || ''
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || ''
 
 const CONTACT_DETAILS = [
   { icon: 'fa-solid fa-envelope', label: 'Email', value: 'abdullahkhan824779@gmail.com', href: 'mailto:abdullahkhan824779@gmail.com' },
@@ -22,16 +22,33 @@ export default function Contact() {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    if (window.emailjs) {
-      window.emailjs.init(EMAILJS_PUBLIC_KEY)
+    if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+      if (window.emailjs) {
+        window.emailjs.init(EMAILJS_PUBLIC_KEY)
+        setReady(true)
+      } else {
+        const timer = setInterval(() => {
+          if (window.emailjs) {
+            window.emailjs.init(EMAILJS_PUBLIC_KEY)
+            setReady(true)
+            clearInterval(timer)
+          }
+        }, 500)
+        return () => clearInterval(timer)
+      }
+    } else {
       setReady(true)
     }
   }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!ready) {
-      setStatus({ type: 'error', message: 'Email service not ready. Try again in a moment.' })
+
+    if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || EMAILJS_PUBLIC_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+      setStatus({ 
+        type: 'error', 
+        message: 'EmailJS keys are missing! Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in Vercel or .env.local' 
+      })
       return
     }
 
@@ -44,16 +61,18 @@ export default function Contact() {
       const res = await window.emailjs.sendForm(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        form
+        form,
+        EMAILJS_PUBLIC_KEY
       )
 
-      if (res.status === 200) {
+      if (res.status === 200 || res.text === 'OK') {
         setStatus({ type: 'success', message: "Message sent successfully! I'll get back to you soon." })
         form.reset()
       } else {
         throw new Error('Send failed')
       }
-    } catch {
+    } catch (err) {
+      console.error('EmailJS submit error:', err)
       setStatus({ type: 'error', message: 'Failed to send. Please email me directly at abdullahkhan824779@gmail.com' })
     } finally {
       setSending(false)
@@ -99,8 +118,8 @@ export default function Contact() {
             <form className="contact-form" id="contactForm" onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-field">
-                  <label htmlFor="form_name">Name</label>
-                  <input id="form_name" placeholder="Your name" name="form_name" type="text" required />
+                  <label htmlFor="from_name">Name</label>
+                  <input id="from_name" placeholder="Your name" name="from_name" type="text" required />
                 </div>
                 <div className="form-field">
                   <label htmlFor="from_email">Email</label>

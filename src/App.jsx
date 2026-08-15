@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Stats from './components/Stats'
 import MarqueeBand from './components/MarqueeBand'
 import About from './components/About'
 import Skills from './components/Skills'
@@ -59,7 +58,6 @@ function App() {
       {!splashDone && <SplashScreen onFinish={onSplashFinish} />}
       <Navbar toggleTheme={toggleTheme} />
       <Hero />
-      <Stats />
       <About />
       <MarqueeBand />
       <Skills />

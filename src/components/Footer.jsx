@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="container footer-inner">
         <div className="footer-brand">
           <span className="logo">AK<span className="accent">.</span></span>
-          <p>WordPress Developer &amp; Front-End Developer, based in Hyderabad, Pakistan.</p>
+          <p>Full-Stack &amp; CMS Developer (WordPress &amp; Webflow), based in Hyderabad, Pakistan.</p>
         </div>
 
         <ul className="footer-links-list">

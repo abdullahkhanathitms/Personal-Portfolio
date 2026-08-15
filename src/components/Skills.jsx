@@ -1,73 +1,127 @@
-import { motion } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useMotionValue, animate } from 'framer-motion'
 import Reveal from './Reveal'
 
-const SKILL_GROUPS = [
-  {
-    category: 'Front-End Development',
-    icon: 'fa-solid fa-laptop-code',
-    skills: [
-      { name: 'HTML5', icon: 'fa-brands fa-html5', level: 95, tier: 'Expert' },
-      { name: 'CSS3', icon: 'fa-brands fa-css3-alt', level: 92, tier: 'Expert' },
-      { name: 'JavaScript', icon: 'fa-brands fa-js', level: 85, tier: 'Advanced' },
-      { name: 'Bootstrap', icon: 'fa-brands fa-bootstrap', level: 88, tier: 'Advanced' },
-      { name: 'React', icon: 'fa-brands fa-react', level: 72, tier: 'Intermediate' },
-      { name: 'Responsive Design', icon: 'fa-solid fa-mobile-screen', level: 93, tier: 'Expert' },
-    ],
-  },
-  {
-    category: 'WordPress & CMS',
-    icon: 'fa-brands fa-wordpress',
-    skills: [
-      { name: 'WordPress Development', icon: 'fa-brands fa-wordpress', level: 95, tier: 'Expert' },
-      { name: 'Elementor Pro', icon: 'fa-solid fa-layer-group', level: 92, tier: 'Expert' },
-      { name: 'WooCommerce', icon: 'fa-solid fa-cart-shopping', level: 85, tier: 'Advanced' },
-      { name: 'Shopify', icon: 'fa-brands fa-shopify', level: 68, tier: 'Intermediate' },
-      { name: 'Webflow', icon: 'fa-solid fa-code-branch', level: 62, tier: 'Intermediate' },
-      { name: 'Framer', icon: 'fa-solid fa-bolt', level: 70, tier: 'Intermediate' },
-    ],
-  },
+const FRONTEND_SKILLS = [
+  { name: 'React', icon: 'fa-brands fa-react', color: '#61dafb' },
+  { name: 'JavaScript', icon: 'fa-brands fa-js', color: '#f7df1e' },
+  { name: 'HTML5', icon: 'fa-brands fa-html5', color: '#e34c26' },
+  { name: 'CSS3', icon: 'fa-brands fa-css3-alt', color: '#264de4' },
+  { name: 'Bootstrap', icon: 'fa-brands fa-bootstrap', color: '#7952b3' },
+  { name: 'Tailwind CSS', icon: 'fa-solid fa-wind', color: '#38bdf8' },
 ]
+
+const BACKEND_SKILLS = [
+  { name: 'Node.js', icon: 'fa-brands fa-node-js', color: '#68a063' },
+  { name: 'Express.js', icon: 'fa-solid fa-server', color: '#38bdf8' },
+  { name: 'PHP', icon: 'fa-brands fa-php', color: '#777bb4' },
+  { name: 'Python', icon: 'fa-brands fa-python', color: '#3776ab' },
+  { name: 'Java', icon: 'fa-brands fa-java', color: '#f89820' },
+  { name: 'C++', icon: 'fa-solid fa-code', color: '#00599c' },
+  { name: 'MongoDB', icon: 'fa-solid fa-database', color: '#47a248' },
+  { name: 'MySQL', icon: 'fa-solid fa-database', color: '#00758f' },
+  { name: 'REST APIs', icon: 'fa-solid fa-network-wired', color: '#2563eb' },
+]
+
+const CMS_SKILLS = [
+  { name: 'WordPress', icon: 'fa-brands fa-wordpress', color: '#21759b' },
+  { name: 'Webflow', icon: 'fa-brands fa-webflow', color: '#4353ff' },
+  { name: 'Elementor Pro', icon: 'fa-solid fa-layer-group', color: '#92003b' },
+  { name: 'Shopify', icon: 'fa-brands fa-shopify', color: '#96bf48' },
+  { name: 'WooCommerce', icon: 'fa-solid fa-cart-shopping', color: '#96588a' },
+  { name: 'Framer', icon: 'fa-solid fa-bolt', color: '#0055ff' },
+]
+
+function DraggableMarqueeRow({ items, direction = 'left', speed = 0.6 }) {
+  // Multiply array to ensure infinite wrapping with zero gaps
+  const quadItems = [...items, ...items, ...items, ...items, ...items, ...items]
+  const x = useMotionValue(0)
+  const trackRef = useRef(null)
+  const [isDragging, setIsDragging] = useState(false)
+
+  useEffect(() => {
+    let animationFrameId
+    let lastTime = performance.now()
+
+    const step = (time) => {
+      const delta = (time - lastTime) / 1000
+      lastTime = time
+
+      if (!isDragging && trackRef.current) {
+        const trackWidth = trackRef.current.scrollWidth / 2 || 1000
+        const moveAmount = speed * 40 * delta
+        let currentX = x.get()
+
+        if (direction === 'left') {
+          currentX -= moveAmount
+          if (currentX <= -trackWidth) {
+            currentX += trackWidth
+          }
+        } else {
+          currentX += moveAmount
+          if (currentX >= 0) {
+            currentX -= trackWidth
+          }
+        }
+        x.set(currentX)
+      }
+
+      animationFrameId = requestAnimationFrame(step)
+    }
+
+    animationFrameId = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(animationFrameId)
+  }, [isDragging, direction, speed, x])
+
+  return (
+    <div className="skills-marquee-row">
+      <motion.div
+        ref={trackRef}
+        className="skills-marquee-track"
+        style={{ x }}
+        drag="x"
+        dragConstraints={{ left: -4000, right: 4000 }}
+        dragElastic={0.05}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setIsDragging(false)}
+      >
+        {quadItems.map((skill, index) => (
+          <div key={`${skill.name}-${index}`} className="marquee-skill-card glass">
+            <div className="marquee-skill-icon" style={{ color: skill.color }}>
+              <i className={skill.icon}></i>
+            </div>
+            <span className="marquee-skill-name">{skill.name}</span>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  )
+}
 
 export default function Skills() {
   return (
-    <section id="skills">
+    <section id="skills" className="skills-marquee-section">
       <div className="container">
         <Reveal className="section-header center" as="div">
-          <div className="eyebrow" style={{ justifyContent: 'center' }}>What I Work With</div>
-          <h2>Skills &amp; Toolkit</h2>
-          <p>The stack I use to turn a brief into a live, responsive website — from hand-written front-end code to WordPress builds ready for real clients.</p>
+          <div className="eyebrow" style={{ justifyContent: 'center' }}>Tech Ecosystem</div>
+          <h2>Skills &amp; Technologies</h2>
+          <p>Full-stack backend, reactive frontends, and high-performance CMS platforms I engineer with.</p>
         </Reveal>
+      </div>
 
-        <div className="skills-groups">
-          {SKILL_GROUPS.map((group, gi) => (
-            <Reveal key={group.category} delay={gi * 0.1} className="skill-group-card glass">
-              <div className="skill-group-header">
-                <div className="skill-group-icon"><i className={group.icon}></i></div>
-                <h3>{group.category}</h3>
-              </div>
+      {/* Full-width 3-Row Interactive Marquee Container */}
+      <div className="skills-marquee-wrapper">
+        <div className="marquee-smoke-fade left" aria-hidden="true"></div>
+        <div className="marquee-smoke-fade right" aria-hidden="true"></div>
 
-              <div className="skill-list">
-                {group.skills.map((skill, si) => (
-                  <div className="skill-row" key={skill.name}>
-                    <div className="skill-row-top">
-                      <span className="skill-name"><i className={skill.icon}></i>{skill.name}</span>
-                      <span className="skill-tier">{skill.tier}</span>
-                    </div>
-                    <div className="skill-bar-track">
-                      <motion.div
-                        className="skill-bar-fill"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true, amount: 0.4 }}
-                        transition={{ duration: 1, delay: si * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        {/* Row 1: Front-End (Left Move, Draggable) */}
+        <DraggableMarqueeRow items={FRONTEND_SKILLS} direction="left" speed={0.45} />
+
+        {/* Row 2: Back-End & Languages (Right Move, Draggable) */}
+        <DraggableMarqueeRow items={BACKEND_SKILLS} direction="right" speed={0.4} />
+
+        {/* Row 3: CMS & E-Commerce (Left Move, Draggable) */}
+        <DraggableMarqueeRow items={CMS_SKILLS} direction="left" speed={0.5} />
       </div>
     </section>
   )

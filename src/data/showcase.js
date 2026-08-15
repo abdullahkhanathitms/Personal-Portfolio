@@ -1,42 +1,40 @@
-// ⚠️ TODO: replace placeholders below with your real details.
-
 export const PERSONAL_PORTFOLIO = {
-  name: 'Personal Portfolio — WordPress Website',
+  name: 'Personal Portfolio — WordPress & Webflow Website',
   description:
-    'My own portfolio site, designed and built end-to-end on WordPress — used as a live showcase of my WordPress and front-end development work for clients and recruiters.',
-  // TODO: add a screenshot to /public (e.g. public/portfolio-preview.jpg) and set the path below.
+    'My own portfolio site, designed and built end-to-end on WordPress & Webflow — used as a live showcase of my CMS, Webflow, and full-stack development work for clients and recruiters.',
   image: null,
-  // TODO: replace with your live WordPress site URL.
-  liveUrl: 'https://your-wordpress-site.com',
-  tags: ['WordPress', 'Elementor Pro', 'Personal Brand'],
+  liveUrl: 'https://abdullahdev3.vercel.app/',
+  tags: ['WordPress', 'Webflow', 'Elementor Pro', 'Personal Brand'],
 }
 
-// TODO: duplicate this object for each Microsoft certificate you've earned,
-// and fill in the real title, date and credential verification link.
 export const CERTIFICATES = [
   {
-    id: 'cert-1',
-    title: 'Add Certificate Name',
-    issuer: 'Microsoft',
-    date: 'Add Issue Date',
-    // TODO: add the certificate badge/image to /public and set the path below.
-    image: null,
-    credentialUrl: '#',
+    id: 'cert-wordpress',
+    title: 'Build a Free Website with WordPress',
+    issuer: 'Coursera',
+    date: 'Aug 4, 2026',
+    image: '/wordpress-cert.png',
+    credentialUrl: 'https://coursera.org/verify/1WBOKWABRSQ0',
   },
   {
-    id: 'cert-2',
-    title: 'Add Certificate Name',
-    issuer: 'Microsoft',
-    date: 'Add Issue Date',
-    image: null,
-    credentialUrl: '#',
+    id: 'cert-shopify',
+    title: 'Create Your E-Commerce Store with Shopify',
+    issuer: 'Coursera',
+    date: 'Aug 6, 2026',
+    image: '/shopify-cert.png',
+    credentialUrl: 'https://coursera.org/verify/13CVEM0EBNA1',
   },
+]
+
+export const LOR_ITEMS = [
   {
-    id: 'cert-3',
-    title: 'Add Certificate Name',
-    issuer: 'Microsoft',
-    date: 'Add Issue Date',
-    image: null,
-    credentialUrl: '#',
+    id: 'lor-brixq',
+    title: 'Certificate of Performance — WordPress Custom Development & Shopify Developer',
+    issuer: 'Brixq Software House',
+    date: '11 July 2026',
+    image: '/brixq-lor.jpg',
+    type: 'Official Recommendation & Experience Certificate',
+    description:
+      'Official Certificate of Performance & Letter of Recommendation from Brixq recognizing 2 years (11 July 2024 – 11 July 2026) of custom WordPress and Shopify development.',
   },
 ]
