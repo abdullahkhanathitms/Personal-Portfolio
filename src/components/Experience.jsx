@@ -3,21 +3,62 @@ import Reveal from './Reveal'
 const EXPERIENCE = [
   {
     company: 'Brixq Software House',
-    role: 'Frontend & CMS Developer',
-    date: '2024 – Present',
+    role: 'WordPress Custom Development & Shopify Developer',
+    date: 'July 2024 – July 2026',
+    badge: 'Full-Time (2 Years)',
     points: [
-      'Design, develop and maintain custom WordPress websites for local and international clients across real estate, eCommerce and corporate sectors.',
-      'Build responsive interfaces with HTML5, CSS3 and JavaScript, ensuring cross-browser compatibility and a smooth mobile experience.',
-      'Implement Elementor Pro layouts and WooCommerce storefronts, including product management and payment integration.',
-      'Optimize page load speed and SEO fundamentals to improve search visibility and user engagement.',
-      'Collaborate with design and development teams to ship projects on time without compromising UI quality.',
+      'Engineered high-converting Singapore real estate websites with saved-property lead capture architectures.',
+      'Built custom WordPress, Webflow, Shopify, and WooCommerce platforms for international clients using Elementor Pro.',
+      'Developed full-stack web applications, custom theme features, REST APIs, and database integrations.',
+      'Optimized page performance, technical SEO, and site security to achieve fast load times across all devices.',
+    ],
+  },
+  {
+    company: 'Brixq Software House',
+    role: 'Web Development Intern',
+    date: 'July 2023 – July 2024',
+    badge: 'Internship (1 Year)',
+    points: [
+      'Completed a 1-year intensive web development internship mastering frontend & CMS development.',
+      'Created personal portfolio site on WordPress and built 30+ responsive websites and eCommerce stores.',
+      'Learned HTML5, CSS3, JavaScript, PHP, WordPress theme customization, and Shopify store setup.',
+      'Delivered client-facing frontend projects which led to a full-time developer role at Brixq.',
+    ],
+  },
+  {
+    company: 'CodeAlpha',
+    role: 'Node.js & Backend Development Intern',
+    date: '1 Month Internship',
+    badge: 'Internship',
+    points: [
+      'Engineered backend REST APIs using Node.js, Express.js, and MongoDB database architecture.',
+      'Developed ShopCo eCommerce REST API backend handling products, users, and order workflows.',
+      'Built a Mini Social Media Platform featuring user profiles, posts, comments, likes, and follower systems with HTML, CSS, JavaScript frontend and Express.js backend.',
     ],
   },
 ]
 
 const EDUCATION = [
-  { school: 'Hyderabad Institute for Technology & Management Sciences', program: 'BS Software Engineering — 2025 – Present' },
-  { school: 'Degree College Hyderabad', program: 'Intermediate, Pre-Engineering — 2023 – 2025' },
+  {
+    school: 'Hyderabad Institute for Technology & Management Sciences',
+    program: 'BS Software Engineering — 2025 – Present',
+    icon: 'fa-solid fa-graduation-cap',
+  },
+  {
+    school: 'Degree College Hyderabad',
+    program: 'Intermediate, Pre-Engineering — 2020 – 2022',
+    icon: 'fa-solid fa-building-columns',
+  },
+  {
+    school: 'Media Production Art',
+    program: 'Web Development Course — 2020',
+    icon: 'fa-solid fa-laptop-code',
+  },
+  {
+    school: 'Urwa Islamic School',
+    program: 'Matriculation (Secondary Science Education) — 2018 – 2020',
+    icon: 'fa-solid fa-school',
+  },
 ]
 
 export default function Experience() {
@@ -27,12 +68,12 @@ export default function Experience() {
         <Reveal className="section-header" as="div">
           <div className="eyebrow">Career Path</div>
           <h2>Work Experience</h2>
-          <p>Hands-on WordPress and front-end development for real clients — building sites that are fast, responsive and ready to convert.</p>
+          <p>My professional journey spanning full-stack development, WordPress &amp; Webflow CMS engineering, Shopify eCommerce platforms, and backend REST API architecture.</p>
         </Reveal>
 
         <div className="timeline">
           {EXPERIENCE.map((exp, i) => (
-            <Reveal key={exp.company} delay={i * 0.08} className="timeline-item">
+            <Reveal key={`${exp.company}-${exp.role}`} delay={i * 0.08} className="timeline-item">
               <div className="timeline-marker">
                 <span className="timeline-dot"></span>
                 {i !== EXPERIENCE.length - 1 && <span className="timeline-line"></span>}
@@ -61,7 +102,7 @@ export default function Experience() {
           <div className="education-grid">
             {EDUCATION.map((ed) => (
               <div className="education-card glass" key={ed.school}>
-                <i className="fa-solid fa-graduation-cap"></i>
+                <i className={ed.icon || 'fa-solid fa-graduation-cap'}></i>
                 <div>
                   <h4>{ed.school}</h4>
                   <p>{ed.program}</p>
