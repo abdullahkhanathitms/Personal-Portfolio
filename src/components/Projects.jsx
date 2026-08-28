@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Reveal from './Reveal'
 import { GITHUB_USER } from '../data/socials'
-import { PERSONAL_PORTFOLIO, CERTIFICATES, LOR_ITEMS } from '../data/showcase'
+import { PERSONAL_PORTFOLIO_ITEMS, CERTIFICATES, LOR_ITEMS } from '../data/showcase'
 
 const FEATURED_PROJECTS = [
   {
@@ -136,42 +136,44 @@ function ProjectsPanel() {
 }
 
 function PortfolioPanel() {
-  const p = PERSONAL_PORTFOLIO
-
   return (
-    <motion.div {...panelMotion} className="portfolio-panel">
-      <div className="portfolio-card glass">
-        <div className="portfolio-preview">
-          {p.image ? (
-            <img src={p.image} alt={p.name} />
-          ) : (
-            <div className="portfolio-preview-placeholder">
-              <i className="fa-brands fa-wordpress"></i>
-              <span>WordPress &amp; Webflow Live Portfolio</span>
+    <motion.div {...panelMotion} className="portfolio-panel-list">
+      {PERSONAL_PORTFOLIO_ITEMS.map((p) => (
+        <div className="portfolio-card glass" key={p.id}>
+          <a 
+            href={p.liveUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="portfolio-preview"
+            title={`Click to visit ${p.name}`}
+          >
+            <div className="portfolio-browser-bar">
+              <span></span><span></span><span></span>
             </div>
-          )}
-          <div className="portfolio-browser-bar">
-            <span></span><span></span><span></span>
+
+            <div className="portfolio-image-viewport">
+              <img src={p.image} alt={p.name} className="portfolio-scrolling-image" />
+            </div>
+          </a>
+
+          <div className="portfolio-info">
+            <h3>{p.name}</h3>
+            <p>{p.description}</p>
+
+            <div className="repo-meta">
+              {p.tags.slice(0, 3).map((tag) => (
+                <span className="tech-tag" key={tag}>{tag}</span>
+              ))}
+            </div>
+
+            <div className="project-actions">
+              <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link primary">
+                Visit Site <i className="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
           </div>
         </div>
-
-        <div className="portfolio-info">
-          <h3>{p.name}</h3>
-          <p>{p.description}</p>
-
-          <div className="repo-meta">
-            {p.tags.slice(0, 3).map((tag) => (
-              <span className={`tech-tag ${getTagClass(tag)}`} key={tag}>{tag}</span>
-            ))}
-          </div>
-
-          <div className="project-actions">
-            <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link primary">
-              Visit Site <i className="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+      ))}
     </motion.div>
   )
 }

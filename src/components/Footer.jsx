@@ -5,23 +5,18 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || ''
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || ''
 
-const NAV_LINKS = [
+const EXPLORE_LINKS = [
   { href: '#hero', label: 'Home' },
   { href: '#about', label: 'About Me' },
   { href: '#skills', label: 'Skills & Stack' },
   { href: '#experience', label: 'Work Experience' },
+]
+
+const PORTFOLIO_LINKS = [
   { href: '#projects', label: 'Featured Projects' },
   { href: '#services', label: 'Services' },
   { href: '#testimonials', label: 'Testimonials' },
   { href: '#contact', label: 'Contact' },
-]
-
-const SERVICES_LINKS = [
-  { href: '#services', label: 'Full-Stack Web Applications' },
-  { href: '#services', label: 'WordPress & Webflow Development' },
-  { href: '#services', label: 'Shopify & WooCommerce Stores' },
-  { href: '#services', label: 'Custom REST API & Backend' },
-  { href: '#services', label: 'Technical SEO & Performance' },
 ]
 
 export default function Footer() {
@@ -68,14 +63,10 @@ export default function Footer() {
     }
   }
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
     <footer className="footer-redesigned">
       <div className="container footer-main-grid">
-        {/* Col 1: Brand, Bio, Social Icons & Direct Info */}
+        {/* Col 1: Brand, Bio & Social Icons */}
         <div className="footer-col footer-col-brand">
           <a href="#hero" className="footer-logo">
             <span className="logo">Abdullah<span className="accent">.</span></span>
@@ -91,28 +82,13 @@ export default function Footer() {
               </a>
             ))}
           </div>
-
-          <div className="footer-quick-contact">
-            <a href="mailto:abdullahkhan824779@gmail.com" className="footer-contact-link">
-              <i className="fa-solid fa-envelope"></i>
-              <span>abdullahkhan824779@gmail.com</span>
-            </a>
-            <a href="tel:+923700158852" className="footer-contact-link">
-              <i className="fa-solid fa-phone"></i>
-              <span>+92 370 0158852</span>
-            </a>
-            <div className="footer-contact-link">
-              <i className="fa-solid fa-location-dot"></i>
-              <span>Hyderabad, Pakistan</span>
-            </div>
-          </div>
         </div>
 
-        {/* Col 2: Navigation Links */}
+        {/* Col 2: Explore / Quick Links */}
         <div className="footer-col">
-          <h4 className="footer-col-title">Navigation</h4>
+          <h4 className="footer-col-title">Explore</h4>
           <ul className="footer-nav-links">
-            {NAV_LINKS.map((l) => (
+            {EXPLORE_LINKS.map((l) => (
               <li key={l.href}>
                 <a href={l.href}>{l.label}</a>
               </li>
@@ -120,13 +96,13 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Col 3: Services / Solutions Links */}
+        {/* Col 3: Portfolio / Selected Work */}
         <div className="footer-col">
-          <h4 className="footer-col-title">Services &amp; Solutions</h4>
+          <h4 className="footer-col-title">Portfolio</h4>
           <ul className="footer-nav-links">
-            {SERVICES_LINKS.map((s, idx) => (
-              <li key={idx}>
-                <a href={s.href}>{s.label}</a>
+            {PORTFOLIO_LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href}>{l.label}</a>
               </li>
             ))}
           </ul>
@@ -162,17 +138,14 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Giant Faded Watermark Brand Typography at Bottom */}
+      {/* Giant Full-Width Faded Watermark "DEVELOPER" with subtle top-to-bottom fade */}
       <div className="footer-watermark-wrap" aria-hidden="true">
-        <span className="footer-watermark-text">ABDULLAH KHAN</span>
+        <span className="footer-watermark-text">DEVELOPER</span>
       </div>
 
-      {/* Bottom Copyright Bar */}
-      <div className="container footer-bottom-bar">
+      {/* Bottom Copyright without top button or divider line */}
+      <div className="container footer-bottom-clean">
         <p>&copy; {new Date().getFullYear()} Abdullah Khan. All rights reserved.</p>
-        <button className="footer-back-to-top" onClick={scrollToTop} aria-label="Back to top">
-          Back to Top <i className="fa-solid fa-arrow-up"></i>
-        </button>
       </div>
     </footer>
   )
