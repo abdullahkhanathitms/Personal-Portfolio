@@ -3,18 +3,6 @@ import Reveal from './Reveal'
 const EXPERIENCE = [
   {
     company: 'Brixq Software House',
-    role: 'WordPress Custom Development & Shopify Developer',
-    date: 'July 2024 – July 2026',
-    badge: 'Full-Time (2 Years)',
-    points: [
-      'Engineered high-converting Singapore real estate websites with saved-property lead capture architectures.',
-      'Built custom WordPress, Webflow, Shopify, and WooCommerce platforms for international clients using Elementor Pro.',
-      'Developed full-stack web applications, custom theme features, REST APIs, and database integrations.',
-      'Optimized page performance, technical SEO, and site security to achieve fast load times across all devices.',
-    ],
-  },
-  {
-    company: 'Brixq Software House',
     role: 'Web Development Intern',
     date: 'July 2023 – July 2024',
     badge: 'Internship (1 Year)',
@@ -36,18 +24,25 @@ const EXPERIENCE = [
       'Built a Mini Social Media Platform featuring user profiles, posts, comments, likes, and follower systems with HTML, CSS, JavaScript frontend and Express.js backend.',
     ],
   },
+  {
+    company: 'Brixq Software House',
+    role: 'WordPress Custom Development & Shopify Developer',
+    date: 'July 2024 – July 2026',
+    badge: 'Full-Time (2 Years)',
+    points: [
+      'Engineered high-converting Singapore real estate websites with saved-property lead capture architectures.',
+      'Built custom WordPress, Webflow, Shopify, and WooCommerce platforms for international clients using Elementor Pro.',
+      'Developed full-stack web applications, custom theme features, REST APIs, and database integrations.',
+      'Optimized page performance, technical SEO, and site security to achieve fast load times across all devices.',
+    ],
+  },
 ]
 
 const EDUCATION = [
   {
-    school: 'Hyderabad Institute for Technology & Management Sciences',
-    program: 'BS Software Engineering — 2025 – Present',
-    icon: 'fa-solid fa-graduation-cap',
-  },
-  {
-    school: 'Degree College Hyderabad',
-    program: 'Intermediate, Pre-Engineering — 2020 – 2022',
-    icon: 'fa-solid fa-building-columns',
+    school: 'Urwa Islamic School',
+    program: 'Matriculation (Secondary Science Education) — 2018 – 2020',
+    icon: 'fa-solid fa-school',
   },
   {
     school: 'Media Production Art',
@@ -55,9 +50,14 @@ const EDUCATION = [
     icon: 'fa-solid fa-laptop-code',
   },
   {
-    school: 'Urwa Islamic School',
-    program: 'Matriculation (Secondary Science Education) — 2018 – 2020',
-    icon: 'fa-solid fa-school',
+    school: 'Degree College Hyderabad',
+    program: 'Intermediate, Pre-Engineering — 2020 – 2022',
+    icon: 'fa-solid fa-building-columns',
+  },
+  {
+    school: 'Hyderabad Institute for Technology & Management Sciences',
+    program: 'BS Software Engineering — 2025 – Present',
+    icon: 'fa-solid fa-graduation-cap',
   },
 ]
 
@@ -79,14 +79,16 @@ export default function Experience() {
                 {i !== EXPERIENCE.length - 1 && <span className="timeline-line"></span>}
               </div>
               <div className="timeline-content glass">
-                <div className="timeline-top">
-                  <h3>{exp.company}</h3>
-                  <span className="timeline-date">{exp.date}</span>
-                </div>
-                <div className="timeline-role">
-                  {exp.role}
+                <div className="timeline-header">
+                  <div className="timeline-company-wrap">
+                    <h3>{exp.company}</h3>
+                    <span className="timeline-date">{exp.date}</span>
+                  </div>
                   {exp.badge && <span className="exp-badge">{exp.badge}</span>}
                 </div>
+
+                <h4 className="timeline-role-title">{exp.role}</h4>
+
                 <ul>
                   {exp.points.map((p) => (
                     <li key={p}>{p}</li>

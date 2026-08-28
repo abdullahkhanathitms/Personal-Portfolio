@@ -24,6 +24,14 @@ export const CERTIFICATES = [
     image: '/shopify-cert.png',
     credentialUrl: 'https://coursera.org/verify/13CVEM0EBNA1',
   },
+  {
+    id: 'cert-seo-squarespace',
+    title: 'Search Engine Optimization (SEO) with Squarespace',
+    issuer: 'Coursera',
+    date: 'Aug 16, 2026',
+    image: '/seo-squarespace-cert.png',
+    credentialUrl: 'https://coursera.org/verify/C9M6CUYMD5C1',
+  },
 ]
 
 export const LOR_ITEMS = [

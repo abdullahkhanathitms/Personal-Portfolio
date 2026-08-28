@@ -1,44 +1,56 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Reveal from './Reveal'
-import { useGithubRepos } from '../hooks/useGithubRepos'
 import { GITHUB_USER } from '../data/socials'
 import { PERSONAL_PORTFOLIO, CERTIFICATES, LOR_ITEMS } from '../data/showcase'
 
 const FEATURED_PROJECTS = [
   {
-    id: 'featured-real-estate',
-    name: 'Singapore Real Estate Websites',
+    id: 'featured-aura',
+    name: 'Aura by Ali Hassan — eCommerce Platform',
     description:
-      'A set of property-listing websites built for the Singapore real estate market — structured listing pages, lead-capture forms and dedicated landing pages designed around one goal: turning visitors into qualified enquiries.',
-    tags: ['WordPress', 'Webflow', 'Elementor Pro', 'Lead Generation'],
-    liveUrl: 'https://savewithproperty.sg',
-    icon: 'fa-solid fa-house-chimney',
+      'A multi-category WooCommerce storefront engineered for high-volume sales, custom product filtering, seamless checkout, and scalable inventory management.',
+    tags: ['WordPress', 'WooCommerce', 'eCommerce'],
+    liveUrl: 'https://aurabyalihassan.com',
+    icon: 'fa-solid fa-store',
   },
   {
-    id: 'featured-ecommerce',
-    name: 'The Soul Project — eCommerce Store',
+    id: 'featured-soul-project',
+    name: 'The Soul Project — Luxury Storefront',
     description:
-      'A WooCommerce and Shopify-powered storefront for a Kuwait-based eCommerce brand, covering product management, secure payment integration and a fully responsive shopping experience.',
+      'A high-converting WooCommerce and Shopify-powered online store for a Kuwait-based eCommerce brand, featuring fast product pages and secure payment integration.',
     tags: ['WooCommerce', 'Shopify', 'eCommerce'],
     liveUrl: 'https://thesoulprojectkw.com',
     icon: 'fa-solid fa-cart-shopping',
   },
   {
-    id: 'featured-corporate',
-    name: 'Peshawar Zalmi — Corporate Website',
+    id: 'featured-peshawar-zalmi',
+    name: 'Peshawar Zalmi — Corporate Platform',
     description:
-      'A performance-focused corporate website built with WordPress, Webflow and Framer, balancing a strong brand identity with fast load times and a consistent experience across every device.',
-    tags: ['WordPress', 'Webflow', 'Framer', 'Corporate'],
+      'A performance-focused corporate digital platform engineered with WordPress, Webflow, and Framer, balancing high brand aesthetics with fast responsive performance.',
+    tags: ['WordPress', 'Webflow', 'Framer'],
     liveUrl: 'https://peshawarzalmi.com',
     icon: 'fa-solid fa-building',
   },
+  {
+    id: 'featured-singapore-real-estate',
+    name: 'Singapore Real Estate Platforms',
+    description:
+      'A set of property-listing websites built for the Singapore real estate market — structured listing pages, lead-capture forms and dedicated landing pages.',
+    tags: ['WordPress', 'Webflow', 'Elementor Pro'],
+    liveUrl: 'https://savewithproperty.sg',
+    icon: 'fa-solid fa-house-chimney',
+  },
+  {
+    id: 'featured-shopco-api',
+    name: 'ShopCo — Full-Stack eCommerce API',
+    description:
+      'A full-stack eCommerce backend API built with Node.js, Express.js, and MongoDB, delivering RESTful product catalogs, cart management, and order workflows.',
+    tags: ['Node.js', 'Express.js', 'MongoDB'],
+    liveUrl: 'https://shopco-codealpha.vercel.app/',
+    icon: 'fa-solid fa-server',
+  },
 ]
-
-const REPO_DESCRIPTIONS = {
-  Team_Python: 'A collaborative Python project focused on applying core programming logic through team-based problem solving.',
-  'ids-interview-platform': 'A front-end interview-platform interface built with structured, maintainable CSS for a clean, usable layout.',
-}
 
 const TABS = [
   { id: 'projects', label: 'Projects', icon: 'fa-solid fa-diagram-project' },
@@ -47,25 +59,9 @@ const TABS = [
   { id: 'lor', label: 'LOR & Recommendation', icon: 'fa-solid fa-award' },
 ]
 
-function getLangIcon(lang) {
-  const map = {
-    JavaScript: 'fa-brands fa-js',
-    HTML: 'fa-brands fa-html5',
-    CSS: 'fa-brands fa-css3-alt',
-    TypeScript: 'fa-solid fa-code',
-    Python: 'fa-brands fa-python',
-    'C#': 'fa-solid fa-code',
-  }
-  return map[lang] || 'fa-solid fa-folder'
-}
-
-function getLangClass(lang) {
-  const map = { JavaScript: 'js-lang', HTML: 'html-lang', CSS: 'css-lang', TypeScript: 'ts-lang' }
-  return map[lang] || ''
-}
-
-function formatRepoName(name) {
-  return name.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+function getTagClass(tag) {
+  const normalized = tag.toLowerCase().replace(/[^a-z0-0]/g, '')
+  return `tag-${normalized}`
 }
 
 const panelMotion = {
@@ -76,8 +72,6 @@ const panelMotion = {
 }
 
 function ProjectsPanel() {
-  const { repos, error } = useGithubRepos()
-
   return (
     <motion.div {...panelMotion}>
       <div className="projects-grid">
@@ -96,68 +90,46 @@ function ProjectsPanel() {
             <p>{project.description}</p>
 
             <div className="repo-meta">
-              {project.tags.map((tag) => (
-                <span className="repo-lang" key={tag}>{tag}</span>
+              {project.tags.slice(0, 3).map((tag) => (
+                <span className={`tech-tag ${getTagClass(tag)}`} key={tag}>{tag}</span>
               ))}
             </div>
 
             <div className="project-actions">
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link primary">
-                Live Site <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                {project.id === 'featured-shopco-api' ? 'Live Site' : 'Live Site'} <i className="fa-solid fa-arrow-up-right-from-square"></i>
               </a>
             </div>
           </Reveal>
         ))}
 
-        {!error && repos.map((repo, i) => {
-          const lang = repo.language || 'Unknown'
-          const description = repo.description || REPO_DESCRIPTIONS[repo.name] || 'A project from my public GitHub repositories.'
+        {/* 6th Card: GitHub Showcase Card */}
+        <Reveal delay={0.3} className="project-card glass github-showcase-card">
+          <div className="project-card-top">
+            <div className="project-icon"><i className="fa-brands fa-github"></i></div>
+            <span className="project-featured-tag"><i className="fa-solid fa-code-branch"></i> Repositories</span>
+          </div>
 
-          return (
-            <Reveal
-              key={repo.id}
-              delay={((FEATURED_PROJECTS.length + i) % 6) * 0.06}
-              className="project-card glass"
+          <h3>Explore More Work on GitHub</h3>
+          <p>Looking for additional full-stack web applications, custom CMS themes, REST API backends, and open-source code? Explore my GitHub.</p>
+
+          <div className="repo-meta">
+            <span className="tech-tag tag-github">GitHub</span>
+            <span className="tech-tag tag-opensource">Open-Source</span>
+          </div>
+
+          <div className="project-actions">
+            <a
+              href={`https://github.com/${GITHUB_USER}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+              style={{ width: '100%', justifyContent: 'center' }}
             >
-              <div className="project-card-top">
-                <div className="project-icon"><i className={getLangIcon(lang)}></i></div>
-              </div>
-
-              <h3>{formatRepoName(repo.name)}</h3>
-              <p>{description}</p>
-
-              <div className="repo-meta">
-                <span className={`repo-lang ${getLangClass(lang)}`}>{lang}</span>
-                {repo.stargazers_count > 0 && (
-                  <span className="repo-stars"><i className="fa-solid fa-star"></i> {repo.stargazers_count}</span>
-                )}
-              </div>
-
-              <div className="project-actions">
-                {repo.homepage && (
-                  <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="project-link primary">
-                    Live Demo <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                  </a>
-                )}
-                <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="project-link">
-                  <i className="fa-brands fa-github"></i> Code
-                </a>
-              </div>
-            </Reveal>
-          )
-        })}
-      </div>
-
-      {error && (
-        <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '1rem 0 2rem' }}>
-          Couldn't load additional GitHub repositories right now — please check back shortly.
-        </p>
-      )}
-
-      <div className="github-cta">
-        <a href={`https://github.com/${GITHUB_USER}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-          <i className="fa-brands fa-github"></i> View All on GitHub
-        </a>
+              <i className="fa-brands fa-github"></i> View My GitHub
+            </a>
+          </div>
+        </Reveal>
       </div>
     </motion.div>
   )
@@ -188,8 +160,8 @@ function PortfolioPanel() {
           <p>{p.description}</p>
 
           <div className="repo-meta">
-            {p.tags.map((tag) => (
-              <span className="repo-lang" key={tag}>{tag}</span>
+            {p.tags.slice(0, 3).map((tag) => (
+              <span className={`tech-tag ${getTagClass(tag)}`} key={tag}>{tag}</span>
             ))}
           </div>
 
@@ -311,7 +283,7 @@ export default function Projects() {
         <Reveal className="section-header center" as="div">
           <div className="eyebrow" style={{ justifyContent: 'center' }}>Selected Work</div>
           <h2>Featured Work &amp; Credentials</h2>
-          <p>Full-Stack projects, WordPress &amp; Webflow builds, official certifications, and recommendation letters.</p>
+          <p>Full-Stack web applications, custom WordPress &amp; Webflow builds, official certifications, and recommendation letters.</p>
         </Reveal>
 
         <div className="tabs-bar" role="tablist" aria-label="Projects section tabs">
