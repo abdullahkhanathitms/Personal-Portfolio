@@ -174,15 +174,6 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
 
 export const CERTIFICATES = [
   {
-    id: 'cert-web-design',
-    title: 'Certificate of Completion — Website Designing',
-    issuer: 'Media Production Art & BILTS',
-    date: '28 Sept 2024',
-    image: '/web-design-cert.png',
-    description:
-      'Professional Course in Website Designing covering responsive frontend layout architecture, digital design principles, and modern website systems (September 2023 – February 2024).',
-  },
-  {
     id: 'cert-wordpress',
     title: 'Build a Free Website with WordPress',
     issuer: 'Coursera',
@@ -205,6 +196,15 @@ export const CERTIFICATES = [
     date: 'Aug 16, 2026',
     image: '/seo-squarespace-cert.png',
     credentialUrl: 'https://coursera.org/verify/C9M6CUYMD5C1',
+  },
+  {
+    id: 'cert-web-design',
+    title: 'Certificate of Completion — Website Designing',
+    issuer: 'Media Production Art & BILTS',
+    date: '28 Sept 2024',
+    image: '/web-design-cert.png',
+    description:
+      'Professional Course in Website Designing covering responsive frontend layout architecture, digital design principles, and modern website systems (September 2023 – February 2024).',
   },
 ]
 
