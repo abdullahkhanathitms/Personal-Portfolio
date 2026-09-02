@@ -116,9 +116,72 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     liveUrl: 'https://abdullahweb14.freedev.app/',
     tags: ['WordPress', 'Elementor Pro', 'Healthcare'],
   },
+  {
+    id: 'portfolio-14',
+    name: 'Pure Himalayan Shilajit — Organic Wellness & E-Commerce Store',
+    description:
+      'An organic health supplement and eCommerce storefront built on WordPress with WooCommerce, featuring product benefit timelines, top pick showcases, customer satisfaction stories, and direct checkout.',
+    image: '/portfolio-preview-14.png',
+    liveUrl: 'https://abdullahweb10.freedev.app/',
+    tags: ['WordPress', 'WooCommerce', 'eCommerce'],
+  },
+  {
+    id: 'portfolio-15',
+    name: 'Digiboost — Creative Digital Marketing & Web Agency',
+    description:
+      'A modern full-service creative digital agency website built on WordPress, featuring interactive service accordion tabs, workflow step timelines, project case studies, tiered pricing cards, and FAQ expanders.',
+    image: '/portfolio-preview-15.png',
+    liveUrl: 'https://abdullahweb15.freedev.app/',
+    tags: ['WordPress', 'Elementor Pro', 'Marketing'],
+  },
+  {
+    id: 'portfolio-16',
+    name: 'Dzone Solutions — AI Automation & Technology Consulting',
+    description:
+      'A high-tech digital consulting and outsourcing platform built on WordPress, featuring AI workflow automation architectures, enterprise transformation matrices, service breakdown grids, and contact inquiry channels.',
+    image: '/portfolio-preview-16.png',
+    liveUrl: 'https://abdullahweb16.freedev.app/',
+    tags: ['WordPress', 'Elementor Pro', 'AI Solutions'],
+  },
+  {
+    id: 'portfolio-17',
+    name: 'Turkish Marine Market — Premium Maritime & Yachting Solutions',
+    description:
+      'A luxury maritime and yacht engineering platform built on WordPress, featuring vessels & crafts portfolios, engineering materials catalogs, Middle East authorized distributorship showcases, and maritime consultation booking.',
+    image: '/portfolio-preview-17.png',
+    liveUrl: 'https://abdullahweb19.freedev.app/',
+    tags: ['WordPress', 'Elementor Pro', 'Maritime'],
+  },
+  {
+    id: 'portfolio-18',
+    name: 'FundFlex — Personal & Business Financial Management Platform',
+    description:
+      'A modern FinTech SaaS platform built on WordPress, featuring real-time expense tracking, interactive financial health analytics charts, transaction management tools, and FAQ accordions.',
+    image: '/portfolio-preview-18.png',
+    liveUrl: 'https://abdullahweb18.freedev.app/',
+    tags: ['WordPress', 'Elementor Pro', 'FinTech'],
+  },
+  {
+    id: 'portfolio-19',
+    name: 'Namaste & Grow — Soul Centered Web Design & Wellness Agency',
+    description:
+      'A holistic web design and digital branding platform built on WordPress for wellness businesses, featuring comparison charts, custom tiered package cards, AI chatbot integrations, and consultation booking.',
+    image: '/portfolio-preview-19.png',
+    liveUrl: 'https://abdullahweb17.freedev.app/',
+    tags: ['WordPress', 'Elementor Pro', 'Creative Design'],
+  },
 ]
 
 export const CERTIFICATES = [
+  {
+    id: 'cert-web-design',
+    title: 'Certificate of Completion — Website Designing',
+    issuer: 'Media Production Art & BILTS',
+    date: '28 Sept 2024',
+    image: '/web-design-cert.png',
+    description:
+      'Professional Course in Website Designing covering responsive frontend layout architecture, digital design principles, and modern website systems (September 2023 – February 2024).',
+  },
   {
     id: 'cert-wordpress',
     title: 'Build a Free Website with WordPress',

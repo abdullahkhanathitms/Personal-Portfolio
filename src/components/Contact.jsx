@@ -113,6 +113,10 @@ export default function Contact() {
         <div className="contact-grid-enhanced">
           {/* Left Info Panel */}
           <Reveal className="contact-info-panel-modern glass">
+            <div className="availability-badge">
+              <span className="pulse-indicator"></span>
+              <span>Available for New Projects</span>
+            </div>
             <h3>Contact Information</h3>
             <p className="contact-subtitle">
               Reach out directly or send a message. I typically respond within a few hours.
