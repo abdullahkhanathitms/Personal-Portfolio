@@ -5,7 +5,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A high-performance corporate SaaS and financial investment web platform built on WordPress with custom Elementor Pro architecture, dynamic service breakdowns, interactive FAQ accordions, and client testimonial sliders.',
     image: '/portfolio-preview-1.png',
-    liveUrl: 'https://abdullahweb01.freedev.app/',
+    liveUrl: 'https://abdullahweb01.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Corporate'],
   },
   {
@@ -14,7 +14,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A luxury real estate and villa architecture showcase platform built on WordPress, featuring separate residential villa specifications, interactive floor plans, amenity galleries, and automated visit scheduling.',
     image: '/portfolio-preview-2.png',
-    liveUrl: 'https://abdullahweb02.freedev.app/',
+    liveUrl: 'https://abdullahweb02.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Real Estate'],
   },
   {
@@ -23,7 +23,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A modern high-end architectural real estate platform built on WordPress, featuring studio and duplex apartment layouts, building amenities overview, proximity distance radars, and visit scheduling.',
     image: '/portfolio-preview-3.png',
-    liveUrl: 'https://abdullahweb03.freedev.app/',
+    liveUrl: 'https://abdullahweb03.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Architecture'],
   },
   {
@@ -32,7 +32,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A specialty hospitality and cafe digital storefront built on WordPress, featuring digital food & wine menus, online ordering workflows, table reservation systems, and customer review portals.',
     image: '/portfolio-preview-4.png',
-    liveUrl: 'https://abdullahweb04.freedev.app/',
+    liveUrl: 'https://abdullahweb04.freedev.app/?nocache',
     tags: ['WordPress', 'WooCommerce', 'Hospitality'],
   },
   {
@@ -41,7 +41,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A fine dining restaurant and gourmet culinary storefront built on WordPress, featuring interactive seasonal food menus, categorized dishes, online discount ordering, and table reservation booking.',
     image: '/portfolio-preview-5.png',
-    liveUrl: 'https://abdullahweb05.freedev.app/',
+    liveUrl: 'https://abdullahweb05.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Hospitality'],
   },
   {
@@ -50,7 +50,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A comprehensive modern real estate marketplace platform built on WordPress, featuring advanced multi-filter property searches, luxury apartment & commercial listings, and agent consultation booking.',
     image: '/portfolio-preview-6.png',
-    liveUrl: 'https://abdullahweb06.freedev.app/',
+    liveUrl: 'https://abdullahweb06.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Real Estate'],
   },
   {
@@ -59,7 +59,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A dedicated Singapore landed property portal built on WordPress, featuring bungalow and terrace house categorization, instant property valuation tools, and direct buyer-developer connection channels.',
     image: '/portfolio-preview-7.png',
-    liveUrl: 'https://abdullahweb09.freedev.app/',
+    liveUrl: 'https://abdullahweb09.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Real Estate'],
   },
   {
@@ -68,7 +68,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A premier Singapore residential development platform built on WordPress, featuring interactive unit mix selectors, neighborhood convenience maps, VVIP preview registrations, and digital e-brochure downloads.',
     image: '/portfolio-preview-8.png',
-    liveUrl: 'https://abdullahweb07.freedev.app/',
+    liveUrl: 'https://abdullahweb07.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Real Estate'],
   },
   {
@@ -77,7 +77,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A corporate leadership development and management consultancy platform built on WordPress, featuring executive trainer profiles, core domain matrices, training catalogues, and corporate inquiry workflows.',
     image: '/portfolio-preview-9.png',
-    liveUrl: 'https://abdullahweb08.freedev.app/',
+    liveUrl: 'https://abdullahweb08.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Corporate'],
   },
   {
@@ -86,7 +86,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A high-converting digital marketing and creative agency website built on WordPress, featuring interactive service expanders, case study work showcases, tiered pricing comparison cards, and client reviews.',
     image: '/portfolio-preview-10.png',
-    liveUrl: 'https://abdullahweb12.freedev.app/',
+    liveUrl: 'https://abdullahweb12.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Marketing'],
   },
   {
@@ -95,7 +95,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A premier industrial fabrication and engineering platform built on WordPress, showcasing offshore oil & gas, renewable energy, categorized industrial piping products, and technical blog insights.',
     image: '/portfolio-preview-11.png',
-    liveUrl: 'https://abdullahweb13.freedev.app/',
+    liveUrl: 'https://abdullahweb13.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Engineering'],
   },
   {
@@ -104,7 +104,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'An organic landscape architecture and garden design showcase platform built on WordPress, featuring step-by-step landscape workflow guides, interactive project carousels, and client testimonials.',
     image: '/portfolio-preview-12.png',
-    liveUrl: 'https://abdullahweb11.freedev.app/',
+    liveUrl: 'https://abdullahweb11.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Architecture'],
   },
   {
@@ -113,7 +113,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A modern healthcare and physiotherapy clinical platform built on WordPress, featuring tailored injury & orthopedic treatment catalogs, patient step-by-step consultation guides, and automated appointment booking.',
     image: '/portfolio-preview-13.png',
-    liveUrl: 'https://abdullahweb14.freedev.app/',
+    liveUrl: 'https://abdullahweb14.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Healthcare'],
   },
   {
@@ -122,7 +122,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'An organic health supplement and eCommerce storefront built on WordPress with WooCommerce, featuring product benefit timelines, top pick showcases, customer satisfaction stories, and direct checkout.',
     image: '/portfolio-preview-14.png',
-    liveUrl: 'https://abdullahweb10.freedev.app/',
+    liveUrl: 'https://abdullahweb10.freedev.app/?nocache',
     tags: ['WordPress', 'WooCommerce', 'eCommerce'],
   },
   {
@@ -131,7 +131,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A modern full-service creative digital agency website built on WordPress, featuring interactive service accordion tabs, workflow step timelines, project case studies, tiered pricing cards, and FAQ expanders.',
     image: '/portfolio-preview-15.png',
-    liveUrl: 'https://abdullahweb15.freedev.app/',
+    liveUrl: 'https://abdullahweb15.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Marketing'],
   },
   {
@@ -140,7 +140,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A high-tech digital consulting and outsourcing platform built on WordPress, featuring AI workflow automation architectures, enterprise transformation matrices, service breakdown grids, and contact inquiry channels.',
     image: '/portfolio-preview-16.png',
-    liveUrl: 'https://abdullahweb16.freedev.app/',
+    liveUrl: 'https://abdullahweb16.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'AI Solutions'],
   },
   {
@@ -149,7 +149,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A luxury maritime and yacht engineering platform built on WordPress, featuring vessels & crafts portfolios, engineering materials catalogs, Middle East authorized distributorship showcases, and maritime consultation booking.',
     image: '/portfolio-preview-17.png',
-    liveUrl: 'https://abdullahweb19.freedev.app/',
+    liveUrl: 'https://abdullahweb19.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Maritime'],
   },
   {
@@ -158,7 +158,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A modern FinTech SaaS platform built on WordPress, featuring real-time expense tracking, interactive financial health analytics charts, transaction management tools, and FAQ accordions.',
     image: '/portfolio-preview-18.png',
-    liveUrl: 'https://abdullahweb18.freedev.app/',
+    liveUrl: 'https://abdullahweb18.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'FinTech'],
   },
   {
@@ -167,7 +167,7 @@ export const PERSONAL_PORTFOLIO_ITEMS = [
     description:
       'A holistic web design and digital branding platform built on WordPress for wellness businesses, featuring comparison charts, custom tiered package cards, AI chatbot integrations, and consultation booking.',
     image: '/portfolio-preview-19.png',
-    liveUrl: 'https://abdullahweb17.freedev.app/',
+    liveUrl: 'https://abdullahweb17.freedev.app/?nocache',
     tags: ['WordPress', 'Elementor Pro', 'Creative Design'],
   },
 ]

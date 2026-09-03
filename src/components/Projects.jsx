@@ -152,7 +152,7 @@ function PortfolioPanel() {
             </div>
 
             <div className="portfolio-image-viewport">
-              <img src={p.image} alt={p.name} className="portfolio-scrolling-image" />
+              <img src={p.image} alt={p.name} className="portfolio-scrolling-image" loading="lazy" decoding="async" />
             </div>
           </a>
 
@@ -182,7 +182,7 @@ function ImageCertCard({ item, onSelect }) {
   return (
     <div className="cert-image-card glass" onClick={() => onSelect(item)}>
       <div className="cert-image-wrap">
-        <img src={item.image} alt={item.title} />
+        <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
         <div className="cert-image-overlay">
           <span className="cert-zoom-btn">
             <i className="fa-solid fa-magnifying-glass-plus"></i> View Full
@@ -250,7 +250,7 @@ function CertModal({ item, onClose }) {
 
           <div className="cert-modal-body">
             <div className="cert-modal-img-wrap">
-              <img src={item.image} alt={item.title} className="cert-modal-img" />
+              <img src={item.image} alt={item.title} className="cert-modal-img" loading="eager" decoding="async" />
             </div>
             <div className="cert-modal-meta">
               <h3>{item.title}</h3>

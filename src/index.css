@@ -360,9 +360,9 @@ section.tight { padding: 6rem 0; }
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(80px);
   opacity: 0.55;
-  will-change: transform;
+  transform: translateZ(0);
 }
 .blob-a {
   width: 620px; height: 620px;
@@ -384,8 +384,8 @@ section.tight { padding: 6rem 0; }
   animation: floatBlob 14s ease-in-out infinite;
 }
 @keyframes floatBlob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-30px, 30px) scale(1.08); }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-30px, 30px, 0) scale(1.08); }
 }
 .hero-grid {
   position: absolute; inset: 0;
@@ -1824,8 +1824,15 @@ section.tight { padding: 6rem 0; }
 
 @media (max-width: 640px) {
   .hero h1 {
-    font-size: 2.3rem !important;
-    line-height: 1.25 !important;
+    font-size: 2.05rem !important;
+    line-height: 1.22 !important;
+  }
+  .blob {
+    filter: blur(45px);
+    animation: none !important;
+  }
+  .hero-spotlight {
+    display: none;
   }
   .education-card {
     flex-direction: column;

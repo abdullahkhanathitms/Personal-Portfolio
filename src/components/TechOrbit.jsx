@@ -79,6 +79,7 @@ export default function TechOrbit() {
     reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     let raf
+    let isVisible = true
     const size = { w: 0, h: 0 }
     const measure = () => {
       const rect = containerRef.current?.getBoundingClientRect()
@@ -86,6 +87,21 @@ export default function TechOrbit() {
     }
     measure()
     window.addEventListener('resize', measure)
+
+    // IntersectionObserver to pause CPU/GPU RAF loop when out of viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+        if (isVisible && !raf) {
+          raf = requestAnimationFrame(tick)
+        }
+      },
+      { threshold: 0.05 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
 
     const project = (p, ax, ay) => {
       // rotate around Y
@@ -100,6 +116,11 @@ export default function TechOrbit() {
     }
 
     const tick = () => {
+      if (!isVisible) {
+        raf = null
+        return
+      }
+
       if (!dragging.current) {
         const speed = Math.abs(velocity.current.x) + Math.abs(velocity.current.y)
         if (speed > 0.00005) {
@@ -144,7 +165,8 @@ export default function TechOrbit() {
 
     raf = requestAnimationFrame(tick)
     return () => {
-      cancelAnimationFrame(raf)
+      if (raf) cancelAnimationFrame(raf)
+      observer.disconnect()
       window.removeEventListener('resize', measure)
     }
   }, [])

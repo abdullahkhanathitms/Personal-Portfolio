@@ -19,12 +19,21 @@ export default function Hero() {
   // never reflows the layout after the initial animation settles.
   const typedName = useTypewriter(['Abdullah Khan'], { loop: false, typingSpeed: 85 })
 
+  const ticking = useRef(false)
   const handleMouseMove = useCallback((e) => {
-    const el = heroRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    el.style.setProperty('--mx', `${e.clientX - rect.left}px`)
-    el.style.setProperty('--my', `${e.clientY - rect.top}px`)
+    if (ticking.current || window.matchMedia('(pointer: coarse)').matches) return
+    ticking.current = true
+    const clientX = e.clientX
+    const clientY = e.clientY
+    requestAnimationFrame(() => {
+      const el = heroRef.current
+      if (el) {
+        const rect = el.getBoundingClientRect()
+        el.style.setProperty('--mx', `${clientX - rect.left}px`)
+        el.style.setProperty('--my', `${clientY - rect.top}px`)
+      }
+      ticking.current = false
+    })
   }, [])
 
   return (
