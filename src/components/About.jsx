@@ -11,14 +11,6 @@ const QUICK_INFO = [
 export default function About() {
   return (
     <section id="about">
-      {/* Decorative background ambient watermarks from reference */}
-      <div className="about-bg-watermark left-mark" aria-hidden="true">
-        Build<br />Code<br />Create
-      </div>
-      <div className="about-bg-watermark right-mark" aria-hidden="true">
-        Turning<br />Ideas<br />Into Reality
-      </div>
-
       <div className="container">
         <div className="about-grid-enhanced">
           {/* Left Column: Bio & Metadata */}

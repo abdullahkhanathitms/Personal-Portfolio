@@ -30,11 +30,16 @@ export default function IdCard() {
         <span className="spark spark-3"></span>
       </div>
 
-      {/* Lanyard assembly: ribbon strap + metal clasp */}
+      {/* Lanyard assembly: 2 ribbon straps in a V-angle coming from the top section + metal clasp */}
       <div className="lanyard-hang-system">
-        {/* Orange fabric ribbon strap with woven borders */}
-        <div className="lanyard-strap">
-          <span className="strap-text">AK.</span>
+        {/* Dual V-shaped orange fabric straps with AK. print */}
+        <div className="lanyard-v-straps">
+          <div className="lanyard-strap strap-left">
+            <span className="strap-text">AK.</span>
+          </div>
+          <div className="lanyard-strap strap-right">
+            <span className="strap-text">AK.</span>
+          </div>
         </div>
 
         {/* Realistic vector metal lobster carabiner clasp */}
@@ -151,6 +156,9 @@ export default function IdCard() {
               <path d="M0,70 Q75,15 170,68 T340,55 L340,160 L0,160 Z" fill="url(#waveGradSecondary)" />
               <path d="M0,95 Q85,42 170,95 T340,80 L340,160 L0,160 Z" fill="url(#waveGradPrimary)" />
             </svg>
+
+            {/* Fog / Smoke Fade Overlay to seamlessly merge waves into card body without any sharp line */}
+            <div className="id-avatar-fog-overlay" aria-hidden="true"></div>
 
             {/* Dot Matrix Pattern Accents */}
             <div className="id-dot-matrix id-dots-left" aria-hidden="true">

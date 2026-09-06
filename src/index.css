@@ -625,38 +625,9 @@ section.tight { padding: 6rem 0; }
 #about {
   background: var(--surface);
   position: relative;
-  overflow: hidden;
-  padding-top: 5rem;
+  overflow: visible;
+  padding-top: 4.5rem;
   padding-bottom: 5.5rem;
-}
-
-.about-bg-watermark {
-  position: absolute;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-style: italic;
-  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-  line-height: 1.1;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-}
-:root.light .about-bg-watermark {
-  color: rgba(255, 107, 0, 0.08);
-}
-:root:not(.light) .about-bg-watermark {
-  color: rgba(255, 107, 0, 0.04);
-}
-.about-bg-watermark.left-mark {
-  top: 10%;
-  left: 2%;
-  transform: rotate(-8deg);
-}
-.about-bg-watermark.right-mark {
-  bottom: 8%;
-  right: 2%;
-  transform: rotate(6deg);
-  text-align: right;
 }
 
 .about-grid-enhanced {
@@ -798,14 +769,14 @@ section.tight { padding: 6rem 0; }
   align-items: center;
   width: 100%;
   max-width: 350px;
-  margin-top: -1.2rem;
+  margin-top: -3.8rem;
 }
 
-/* 'That's Me!' handwritten annotation */
+/* 'That's Me!' handwritten annotation - shifted outward to never overlap card */
 .thats-me-annotation {
   position: absolute;
-  left: -78px;
-  top: 42%;
+  left: -115px;
+  top: 44%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -865,7 +836,7 @@ section.tight { padding: 6rem 0; }
   transform: rotate(-30deg);
 }
 
-/* Lanyard hanging strap and clasp */
+/* Dual V-shaped Lanyard Straps connecting to top boundary */
 .lanyard-hang-system {
   display: flex;
   flex-direction: column;
@@ -873,33 +844,58 @@ section.tight { padding: 6rem 0; }
   position: relative;
   z-index: 5;
   margin-bottom: -18px;
+  width: 100%;
+}
+
+.lanyard-v-straps {
+  position: relative;
+  width: 140px;
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
 }
 
 .lanyard-strap {
-  width: 44px;
-  height: 72px;
-  background: linear-gradient(180deg, #E65100 0%, #FF6B00 65%, #FF7A00 100%);
+  position: absolute;
+  bottom: 0;
+  width: 32px;
+  height: 105px;
+  background: linear-gradient(180deg, #D9480F 0%, #FF6B00 60%, #FF7A00 100%);
   border-left: 2px dashed rgba(255, 255, 255, 0.45);
   border-right: 2px dashed rgba(255, 255, 255, 0.45);
-  box-shadow: 0 4px 16px rgba(255, 107, 0, 0.4), inset 2px 0 4px rgba(255, 255, 255, 0.2), inset -2px 0 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(255, 107, 0, 0.45), inset 2px 0 4px rgba(255, 255, 255, 0.2), inset -2px 0 4px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.lanyard-strap.strap-left {
+  left: 26px;
+  transform-origin: bottom right;
+  transform: rotate(-18deg);
+}
+
+.lanyard-strap.strap-right {
+  right: 26px;
+  transform-origin: bottom left;
+  transform: rotate(18deg);
+}
+
 .lanyard-strap .strap-text {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   letter-spacing: 0.08em;
   color: #FFFFFF;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transform: rotate(-90deg);
   user-select: none;
 }
 
 .lanyard-clip-wrap {
   position: relative;
-  margin-top: -2px;
+  margin-top: -6px;
   z-index: 6;
 }
 .lanyard-metal-clip {
@@ -1029,11 +1025,11 @@ section.tight { padding: 6rem 0; }
   color: var(--text-muted);
 }
 
-/* Avatar Section & Waves */
+/* Avatar Section & Waves with Fog Fade Transition */
 .id-avatar-section {
   position: relative;
-  height: 140px;
-  margin: 0 -1.6rem 0.6rem;
+  height: 160px;
+  margin: 0 -1.6rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1046,6 +1042,24 @@ section.tight { padding: 6rem 0; }
   height: 100%;
   z-index: 1;
 }
+
+/* Fog / Smoke Fade Overlay to seamlessly merge waves into card body without any sharp line */
+.id-avatar-fog-overlay {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 65px;
+  pointer-events: none;
+  z-index: 2;
+}
+:root.light .id-avatar-fog-overlay {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 35%, rgba(255, 255, 255, 0.9) 70%, #FFFFFF 100%);
+}
+:root:not(.light) .id-avatar-fog-overlay {
+  background: linear-gradient(to bottom, rgba(20, 16, 12, 0) 0%, rgba(20, 16, 12, 0.45) 35%, rgba(20, 16, 12, 0.9) 70%, #14100C 100%);
+}
+
 .id-dot-matrix {
   position: absolute;
   display: grid;
@@ -1061,12 +1075,12 @@ section.tight { padding: 6rem 0; }
 }
 .id-dots-left {
   left: 18px;
-  top: 50%;
+  top: 48%;
   transform: translateY(-50%);
 }
 .id-dots-right {
   right: 18px;
-  top: 50%;
+  top: 48%;
   transform: translateY(-50%);
 }
 
@@ -1075,12 +1089,12 @@ section.tight { padding: 6rem 0; }
   z-index: 3;
 }
 .id-avatar-ring {
-  width: 110px;
-  height: 110px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
-  padding: 3px;
+  padding: 3.5px;
   background: linear-gradient(135deg, #FFA033 0%, #FF6B00 100%);
-  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.45);
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.5);
 }
 .id-avatar-img {
   width: 100%;
@@ -1172,15 +1186,15 @@ section.tight { padding: 6rem 0; }
   z-index: 2;
 }
 .id-signature-wrap {
-  width: 110px;
-  height: 38px;
+  width: 105px;
+  height: 48px;
   display: flex;
   align-items: center;
 }
 .id-signature {
   width: 100%;
   height: auto;
-  max-height: 36px;
+  max-height: 46px;
   object-fit: contain;
 }
 :root.light .id-sig-light { display: none; }
