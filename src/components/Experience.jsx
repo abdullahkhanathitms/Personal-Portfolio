@@ -71,32 +71,44 @@ export default function Experience() {
           <p>My professional journey spanning full-stack development, WordPress &amp; Webflow CMS engineering, Shopify eCommerce platforms, and backend REST API architecture.</p>
         </Reveal>
 
-        <div className="timeline">
-          {EXPERIENCE.map((exp, i) => (
-            <Reveal key={`${exp.company}-${exp.role}`} delay={i * 0.08} className="timeline-item">
-              <div className="timeline-marker">
-                <span className="timeline-dot"></span>
-                {i !== EXPERIENCE.length - 1 && <span className="timeline-line"></span>}
-              </div>
-              <div className="timeline-content glass">
-                <div className="timeline-header">
-                  <div className="timeline-company-wrap">
-                    <h3>{exp.company}</h3>
-                    <span className="timeline-date">{exp.date}</span>
-                  </div>
-                  {exp.badge && <span className="exp-badge">{exp.badge}</span>}
+        <div className="timeline-alternating">
+          <div className="timeline-spine"></div>
+          {EXPERIENCE.map((exp, i) => {
+            const isLeft = i % 2 === 0
+            return (
+              <div
+                key={`${exp.company}-${exp.role}`}
+                className={`timeline-alt-item ${isLeft ? 'item-left' : 'item-right'}`}
+              >
+                <div className="timeline-node">
+                  <span className="timeline-node-dot"></span>
                 </div>
 
-                <h4 className="timeline-role-title">{exp.role}</h4>
+                <Reveal
+                  delay={i * 0.1}
+                  className="timeline-card-wrapper"
+                >
+                  <div className="timeline-card glass">
+                    <div className="timeline-header">
+                      <div className="timeline-company-wrap">
+                        <h3>{exp.company}</h3>
+                        <span className="timeline-date">{exp.date}</span>
+                      </div>
+                      {exp.badge && <span className="exp-badge">{exp.badge}</span>}
+                    </div>
 
-                <ul>
-                  {exp.points.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
-                </ul>
+                    <h4 className="timeline-role-title">{exp.role}</h4>
+
+                    <ul>
+                      {exp.points.map((p) => (
+                        <li key={p}>{p}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
               </div>
-            </Reveal>
-          ))}
+            )
+          })}
         </div>
 
         <Reveal className="education-block" as="div">

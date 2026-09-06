@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0F172A;
+  background: #0A0908;
   transition: opacity 0.5s ease;
   overflow: hidden;
 }
@@ -13,10 +13,10 @@
 .splash::before {
   content: '';
   position: absolute;
-  width: 500px; height: 500px;
+  width: 560px; height: 560px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, transparent 70%);
-  filter: blur(60px);
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.38) 0%, rgba(234, 88, 12, 0.18) 45%, transparent 70%);
+  filter: blur(70px);
 }
 
 .splash.exit {
@@ -42,10 +42,11 @@
   font-weight: 800;
   font-size: clamp(3.5rem, 12vw, 7rem);
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #F8FAFC 0%, #93C5FD 50%, #06B6D4 100%);
+  background: linear-gradient(135deg, #FFFFFF 15%, #FFA033 55%, #FF6B00 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 35px rgba(255, 107, 0, 0.45));
 }
 
 .splash-sub {
@@ -53,7 +54,7 @@
   margin-top: 0.75rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #94A3B8;
+  color: #B8ABA0;
 }

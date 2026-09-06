@@ -288,19 +288,21 @@ export default function Projects() {
           <p>Full-Stack web applications, custom WordPress &amp; Webflow builds, official certifications, and recommendation letters.</p>
         </Reveal>
 
-        <div className="tabs-bar" role="tablist" aria-label="Projects section tabs">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              role="tab"
-              aria-selected={activeTab === tab.id}
-              className={`tab-btn ${activeTab === tab.id ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              <i className={tab.icon}></i>
-              {tab.label}
-            </button>
-          ))}
+        <div className="tabs-bar-container">
+          <div className="tabs-bar" role="tablist" aria-label="Projects section tabs">
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                role="tab"
+                aria-selected={activeTab === tab.id}
+                className={`tab-btn ${activeTab === tab.id ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                <i className={tab.icon}></i>
+                <span>{tab.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         <AnimatePresence mode="wait">
