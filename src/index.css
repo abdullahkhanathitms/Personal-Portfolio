@@ -620,66 +620,626 @@ section.tight { padding: 6rem 0; }
 @keyframes scrollLine { 0%, 100% { opacity: 0; transform: scaleY(0); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
 
 /* ============================================================
-   About
+   About — Enhanced with Hanging Lanyard ID Badge Card
    ============================================================ */
-#about { background: var(--surface); }
-.about-grid {
+#about {
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  padding-top: 5rem;
+  padding-bottom: 5.5rem;
+}
+
+.about-bg-watermark {
+  position: absolute;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  line-height: 1.1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+:root.light .about-bg-watermark {
+  color: rgba(255, 107, 0, 0.08);
+}
+:root:not(.light) .about-bg-watermark {
+  color: rgba(255, 107, 0, 0.04);
+}
+.about-bg-watermark.left-mark {
+  top: 10%;
+  left: 2%;
+  transform: rotate(-8deg);
+}
+.about-bg-watermark.right-mark {
+  bottom: 8%;
+  right: 2%;
+  transform: rotate(6deg);
+  text-align: right;
+}
+
+.about-grid-enhanced {
   display: grid;
-  grid-template-columns: 1fr 0.9fr;
-  gap: 4rem;
+  grid-template-columns: 1.15fr 0.9fr;
+  gap: 3.5rem;
   align-items: start;
+  position: relative;
+  z-index: 1;
 }
-.about-copy h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.18;
-  margin-bottom: 1.5rem;
+
+.eyebrow-dash {
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--primary);
+  margin-right: 0.5rem;
+  border-radius: 2px;
+  vertical-align: middle;
 }
-.about-bio {
+
+.about-copy-enhanced h2 {
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.35rem;
+  font-weight: 800;
+}
+
+.text-highlight-orange {
+  color: var(--primary);
+  background: linear-gradient(135deg, #FFA033 0%, #FF6B00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.about-copy-enhanced .about-bio {
   color: var(--text-muted);
-  font-size: 1.05rem;
-  line-height: 1.85;
-  margin-bottom: 2.25rem;
-  max-width: 54ch;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  max-width: 58ch;
 }
-.quick-info { display: flex; flex-direction: column; gap: 0.9rem; }
-.quick-info li {
+
+.quick-info-enhanced {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  margin-bottom: 2.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.quick-info-item {
   display: flex;
   align-items: center;
-  gap: 0.8em;
+  gap: 0.95rem;
+}
+
+.quick-info-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 107, 0, 0.12);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 107, 0, 0.22);
+}
+
+.quick-info-text,
+.quick-info-link {
+  font-size: 0.94rem;
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.quick-info-link:hover {
+  color: var(--primary);
+}
+
+.about-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.about-cv-btn {
+  padding: 0.85em 2.2em;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  box-shadow: 0 10px 25px rgba(255, 107, 0, 0.4);
+}
+
+.about-cv-btn i {
+  transform: rotate(45deg);
+  font-size: 0.9rem;
+}
+
+.about-talk-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--primary);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.about-talk-link:hover {
+  color: var(--primary-light);
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   Hanging Lanyard ID Badge Card Component
+   ============================================================ */
+.about-id-column {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.id-card-assembly {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  margin-top: -1.2rem;
+}
+
+/* 'That's Me!' handwritten annotation */
+.thats-me-annotation {
+  position: absolute;
+  left: -78px;
+  top: 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+}
+.thats-me-annotation span {
+  font-family: 'Plus Jakarta Sans', cursive, sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--primary);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.thats-me-annotation svg {
+  margin-top: 0.15rem;
+  margin-left: 1.5rem;
+}
+
+/* Spark burst lines at top right */
+.id-spark-burst {
+  position: absolute;
+  right: -18px;
+  top: 90px;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 10;
+}
+.id-spark-burst .spark {
+  position: absolute;
+  background: var(--primary);
+  border-radius: 2px;
+}
+.id-spark-burst .spark-1 {
+  width: 12px;
+  height: 2.5px;
+  top: 4px;
+  right: 4px;
+  transform: rotate(35deg);
+}
+.id-spark-burst .spark-2 {
+  width: 15px;
+  height: 2.5px;
+  top: 14px;
+  right: 0px;
+  transform: rotate(5deg);
+}
+.id-spark-burst .spark-3 {
+  width: 12px;
+  height: 2.5px;
+  top: 24px;
+  right: 4px;
+  transform: rotate(-30deg);
+}
+
+/* Lanyard hanging strap and clasp */
+.lanyard-hang-system {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+  margin-bottom: -18px;
+}
+
+.lanyard-strap {
+  width: 44px;
+  height: 72px;
+  background: linear-gradient(180deg, #E65100 0%, #FF6B00 65%, #FF7A00 100%);
+  border-left: 2px dashed rgba(255, 255, 255, 0.45);
+  border-right: 2px dashed rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 16px rgba(255, 107, 0, 0.4), inset 2px 0 4px rgba(255, 255, 255, 0.2), inset -2px 0 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lanyard-strap .strap-text {
+  font-family: var(--font-display);
+  font-weight: 900;
   font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transform: rotate(-90deg);
+  user-select: none;
+}
+
+.lanyard-clip-wrap {
+  position: relative;
+  margin-top: -2px;
+  z-index: 6;
+}
+.lanyard-metal-clip {
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.35));
+}
+
+/* Card holder pouch */
+.id-card-holder {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 28px;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  z-index: 2;
+}
+.id-card-assembly:hover .id-card-holder {
+  transform: translateY(-6px);
+}
+
+:root.light .id-card-holder {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+}
+:root.light .id-card-assembly:hover .id-card-holder {
+  box-shadow: 0 32px 70px -15px rgba(255, 107, 0, 0.22), 0 12px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+:root:not(.light) .id-card-holder {
+  background: #14100C;
+  border: 1px solid rgba(255, 107, 0, 0.24);
+  box-shadow: 0 25px 65px -12px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 107, 0, 0.16);
+}
+:root:not(.light) .id-card-assembly:hover .id-card-holder {
+  border-color: rgba(255, 107, 0, 0.5);
+  box-shadow: 0 32px 75px -12px rgba(0, 0, 0, 0.95), 0 0 45px rgba(255, 107, 0, 0.28);
+}
+
+/* Top pouch slots bar */
+.id-holder-top-bar {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+}
+:root.light .id-holder-top-bar {
+  background: #F4F4F5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+:root:not(.light) .id-holder-top-bar {
+  background: #1C1611;
+  border-bottom: 1px solid rgba(255, 107, 0, 0.15);
+}
+
+.id-slot {
+  display: block;
+  background: #0A0908;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.id-slot-center {
+  width: 44px;
+  height: 10px;
+  border-radius: 6px;
+}
+.id-slot-side {
+  width: 18px;
+  height: 7px;
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+/* Card Body */
+.id-card-body {
+  padding: 1.35rem 1.6rem 0.4rem;
+  position: relative;
+}
+
+.id-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.id-logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+:root.light .id-logo-text { color: #18181B; }
+:root:not(.light) .id-logo-text { color: #FFFFFF; }
+.id-logo-text span { color: var(--primary); }
+
+.id-brand-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.id-motto-column {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.id-motto-line {
+  width: 1px;
+  height: 36px;
+  background: var(--border-strong);
+}
+.id-motto-words {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.25;
   color: var(--text-muted);
 }
-.quick-info i {
-  width: 34px; height: 34px;
-  border-radius: var(--radius-sm);
-  background: var(--surface-2);
-  color: var(--accent);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-.quick-info a { color: var(--text-muted); transition: color var(--transition-fast); }
-.quick-info a:hover { color: var(--accent); }
 
-.about-highlights { display: flex; flex-direction: column; gap: 1.25rem; }
-.highlight-card {
-  padding: 1.75rem;
-  border-radius: var(--radius-lg);
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+/* Avatar Section & Waves */
+.id-avatar-section {
+  position: relative;
+  height: 140px;
+  margin: 0 -1.6rem 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-.highlight-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
-.highlight-icon {
-  width: 46px; height: 46px;
-  border-radius: var(--radius-sm);
-  background: var(--gradient-accent);
+.id-waves-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.id-dot-matrix {
+  position: absolute;
   display: grid;
-  place-items: center;
-  color: #fff;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(3, 4px);
+  gap: 5px;
+  z-index: 2;
 }
-.highlight-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
-.highlight-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; }
+.id-dot-matrix span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 107, 0, 0.45);
+}
+.id-dots-left {
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.id-dots-right {
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.id-avatar-frame {
+  position: relative;
+  z-index: 3;
+}
+.id-avatar-ring {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #FFA033 0%, #FF6B00 100%);
+  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.45);
+}
+.id-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+/* Name Block */
+.id-name-block {
+  text-align: center;
+  margin-bottom: 0.9rem;
+}
+.id-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2rem;
+}
+:root.light .id-name { color: #18181B; }
+:root:not(.light) .id-name { color: #FFFFFF; }
+.id-surname {
+  color: var(--primary);
+}
+.id-role {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+
+/* Info Grid */
+.id-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1.15rem;
+  padding: 0 0.2rem;
+}
+.id-info-row {
+  display: grid;
+  grid-template-columns: 85px 12px 1fr;
+  align-items: center;
+  font-size: 0.78rem;
+}
+.id-info-key {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 700;
+  color: var(--text);
+}
+.id-info-key i {
+  color: var(--primary);
+  font-size: 0.75rem;
+  width: 14px;
+  text-align: center;
+}
+.id-colon {
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.id-info-val {
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.id-link {
+  transition: color 0.2s ease;
+}
+.id-link:hover {
+  color: var(--primary);
+}
+
+/* Card Footer */
+.id-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 2;
+}
+.id-signature-wrap {
+  width: 110px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+.id-signature {
+  width: 100%;
+  height: auto;
+  max-height: 36px;
+  object-fit: contain;
+}
+:root.light .id-sig-light { display: none; }
+:root.light .id-sig-dark { display: block; }
+:root:not(.light) .id-sig-dark { display: none; }
+:root:not(.light) .id-sig-light { display: block; }
+
+.id-footer-motto {
+  text-align: right;
+}
+.id-motto-text {
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.id-motto-sub {
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+}
+.id-motto-bar {
+  height: 2px;
+  width: 100%;
+  background: var(--primary);
+  margin-top: 2px;
+  border-radius: 1px;
+}
+
+/* Bottom Wave */
+.id-bottom-wave {
+  margin: 0.5rem -1.6rem -0.4rem;
+  height: 18px;
+  overflow: hidden;
+  line-height: 0;
+}
+.id-bottom-wave svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .about-grid-enhanced {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+  .about-id-column {
+    margin-top: 1rem;
+  }
+  .id-card-assembly {
+    margin-top: 0;
+  }
+  .thats-me-annotation {
+    display: none;
+  }
+}
 
 /* ============================================================
    Skills — 3-Row Interactive Draggable Marquee with Smoke Fade
