@@ -1,6 +1,11 @@
 import React from 'react'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 
 export default function IdCard() {
+  const x = useMotionValue(0)
+  // Derive realistic pendulum rotation from drag x offset around the top hook (e.g. max ~15deg)
+  const rotate = useTransform(x, [-100, 0, 100], [-14, 0, 14])
+
   return (
     <div className="id-card-assembly">
       {/* Decorative 'That's Me!' annotation pointing to the card */}
@@ -30,84 +35,37 @@ export default function IdCard() {
         <span className="spark spark-3"></span>
       </div>
 
-      {/* Lanyard assembly: 2 ribbon straps in a V-angle coming from the top section + metal clasp */}
+      {/* Lanyard assembly: Authentic photorealistic hanging ribbon with AK. branding & metal hook */}
       <div className="lanyard-hang-system">
-        {/* Dual V-shaped orange fabric straps with AK. print */}
-        <div className="lanyard-v-straps">
-          <div className="lanyard-strap strap-left">
-            <span className="strap-text">AK.</span>
-          </div>
-          <div className="lanyard-strap strap-right">
-            <span className="strap-text">AK.</span>
-          </div>
-        </div>
-
-        {/* Realistic vector metal lobster carabiner clasp */}
-        <div className="lanyard-clip-wrap">
-          <svg
-            className="lanyard-metal-clip"
-            width="52"
-            height="62"
-            viewBox="0 0 52 62"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient id="metalSilver" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#E2E8F0" />
-                <stop offset="35%" stopColor="#FFFFFF" />
-                <stop offset="65%" stopColor="#94A3B8" />
-                <stop offset="85%" stopColor="#CBD5E1" />
-                <stop offset="100%" stopColor="#64748B" />
-              </linearGradient>
-              <linearGradient id="metalDark" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#475569" />
-                <stop offset="50%" stopColor="#94A3B8" />
-                <stop offset="100%" stopColor="#334155" />
-              </linearGradient>
-              <filter id="clipShadow" x="-30%" y="-20%" width="160%" height="150%">
-                <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="rgba(0,0,0,0.4)" />
-              </filter>
-            </defs>
-
-            {/* Top horizontal clamp securing the orange ribbon */}
-            <rect x="11" y="0" width="30" height="7" rx="2" fill="url(#metalSilver)" filter="url(#clipShadow)" />
-            <rect x="14" y="2" width="24" height="3" rx="1" fill="#64748B" />
-
-            {/* Swivel eyelet ring */}
-            <circle cx="26" cy="13" r="5" fill="none" stroke="url(#metalSilver)" strokeWidth="2.8" filter="url(#clipShadow)" />
-            <circle cx="26" cy="13" r="2.2" fill="#1E293B" opacity="0.65" />
-
-            {/* Lobster clasp body */}
-            <path
-              d="M21 17 C21 23, 17 31, 17 38 C17 49, 23 54, 26 54 C29 54, 35 49, 35 38 C35 31, 31 23, 31 17 Z"
-              fill="url(#metalSilver)"
-              filter="url(#clipShadow)"
-            />
-            {/* Clasp inner cutout */}
-            <path
-              d="M22 26 C22 33, 21 38, 22 44 C23 48, 29 48, 30 44 C31 38, 30 33, 30 26 Z"
-              fill="#0F172A"
-              opacity="0.5"
-            />
-            {/* Spring hinge bar */}
-            <path d="M19 30 L27 42" stroke="url(#metalDark)" strokeWidth="2" strokeLinecap="round" />
-
-            {/* Hook loop that passes visibly through the center slot */}
-            <path
-              d="M26 50 C26 58, 21 61, 19 61 C16.5 61, 15 58, 15 54"
-              fill="none"
-              stroke="url(#metalSilver)"
-              strokeWidth="3.2"
-              strokeLinecap="round"
-              filter="url(#clipShadow)"
-            />
-          </svg>
-        </div>
+        <img
+          src="/lanyard-ribbon.png"
+          alt="AK Lanyard Ribbon"
+          className="lanyard-ribbon-img"
+        />
       </div>
 
-      {/* Main ID Card Plastic Badge Holder */}
-      <div className="id-card-holder">
+      {/* Main ID Card Plastic Badge Holder - Interactively draggable with pendulum swing physics */}
+      <motion.div
+        className="id-card-holder"
+        drag="x"
+        dragConstraints={{ left: -50, right: 50 }}
+        dragElastic={0.25}
+        dragSnapToOrigin
+        style={{
+          x,
+          rotate,
+          transformOrigin: 'top center',
+          cursor: 'grab',
+          touchAction: 'pan-y',
+        }}
+        whileDrag={{ cursor: 'grabbing' }}
+        transition={{
+          type: 'spring',
+          stiffness: 260,
+          damping: 18,
+          mass: 0.8,
+        }}
+      >
         {/* Transparent top pouch header with 3 die-cut slots */}
         <div className="id-holder-top-bar">
           <span className="id-slot id-slot-side"></span>
@@ -300,7 +258,7 @@ export default function IdCard() {
             </svg>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

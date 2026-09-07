@@ -16,7 +16,7 @@ export default function About() {
           {/* Left Column: Bio & Metadata */}
           <Reveal className="about-copy-enhanced">
             <div className="eyebrow">
-              <span className="eyebrow-dash"></span> ABOUT ME
+              About Me
             </div>
 
             <h2>
@@ -53,17 +53,6 @@ export default function About() {
                 </li>
               ))}
             </ul>
-
-            <div className="about-cta-row">
-              <a href="/resume.pdf" download className="btn btn-primary about-cv-btn">
-                <i className="fa-solid fa-paper-plane"></i>
-                <span>Download CV</span>
-              </a>
-              <a href="#contact" className="about-talk-link">
-                <span>Let's Talk</span>
-                <i className="fa-solid fa-arrow-right"></i>
-              </a>
-            </div>
           </Reveal>
 
           {/* Right Column: Hanging Lanyard ID Badge Card */}

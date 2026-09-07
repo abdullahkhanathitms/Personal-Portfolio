@@ -65,8 +65,8 @@ export default function Experience() {
   return (
     <section id="experience">
       <div className="container">
-        <Reveal className="section-header" as="div">
-          <div className="eyebrow">Career Path</div>
+        <Reveal className="section-header center" as="div">
+          <div className="eyebrow" style={{ justifyContent: 'center' }}>Career Path</div>
           <h2>Work Experience</h2>
           <p>My professional journey spanning full-stack development, WordPress &amp; Webflow CMS engineering, Shopify eCommerce platforms, and backend REST API architecture.</p>
         </Reveal>

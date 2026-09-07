@@ -16,8 +16,8 @@ const NODES = [
   { icon: 'fa-brands fa-webflow', color: '#4353ff' },
 ]
 
-const RADIUS = 165
-const PERSPECTIVE = 560
+const RADIUS = 200
+const PERSPECTIVE = 600
 const AUTO_ROTATE_SPEED = 0.0022 // radians/frame — one slow, full rotation
 const DRAG_SENSITIVITY = 0.006
 const FRICTION = 0.94
@@ -134,15 +134,19 @@ export default function TechOrbit() {
         angle.current.x = Math.max(-MAX_TILT, Math.min(MAX_TILT, angle.current.x))
       }
 
-      const cx = size.w / 2
-      const cy = size.h / 2
+      const w = containerRef.current ? containerRef.current.clientWidth : size.w
+      const h = containerRef.current ? containerRef.current.clientHeight : size.h
+      const cx = w / 2
+      const cy = h / 2
+      // Responsive scale factor so the 200px sphere scales neatly on smaller mobile screens
+      const rScale = w < 480 ? Math.min(1, Math.max(0.65, (w - 60) / 400)) : 1
       const projected = BASE_POINTS.map((p) => project(p, angle.current.x, angle.current.y))
 
       projected.forEach((pt, i) => {
         const el = iconRefs.current[i]
         if (!el) return
         const opacity = 0.45 + 0.55 * ((pt.z + RADIUS) / (RADIUS * 2))
-        el.style.transform = `translate3d(${cx + pt.sx}px, ${cy + pt.sy}px, 0) translate(-50%, -50%) scale(${pt.scale.toFixed(3)})`
+        el.style.transform = `translate3d(${cx + pt.sx * rScale}px, ${cy + pt.sy * rScale}px, 0) translate(-50%, -50%) scale(${(pt.scale * rScale).toFixed(3)})`
         el.style.opacity = opacity.toFixed(2)
         el.style.zIndex = Math.round(pt.z + RADIUS)
       })
@@ -152,10 +156,10 @@ export default function TechOrbit() {
         if (!line) return
         const p1 = projected[a]
         const p2 = projected[b]
-        line.setAttribute('x1', cx + p1.sx)
-        line.setAttribute('y1', cy + p1.sy)
-        line.setAttribute('x2', cx + p2.sx)
-        line.setAttribute('y2', cy + p2.sy)
+        line.setAttribute('x1', cx + p1.sx * rScale)
+        line.setAttribute('y1', cy + p1.sy * rScale)
+        line.setAttribute('x2', cx + p2.sx * rScale)
+        line.setAttribute('y2', cy + p2.sy * rScale)
         const avgOpacity = ((p1.z + p2.z) / 2 + RADIUS) / (RADIUS * 2)
         line.setAttribute('opacity', (0.12 + 0.28 * avgOpacity).toFixed(2))
       })

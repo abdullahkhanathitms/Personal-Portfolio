@@ -102,7 +102,12 @@
    ============================================================ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 body {
   font-family: var(--font-body);
@@ -110,7 +115,17 @@ body {
   color: var(--text);
   line-height: 1.65;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
   transition: background var(--transition), color var(--transition);
+}
+
+#root {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -549,9 +564,13 @@ section.tight { padding: 6rem 0; }
 
 .hero-visual {
   position: relative;
-  display: grid;
-  place-items: center;
-  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 540px;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
 }
 
 .tech-orbit {
@@ -562,6 +581,9 @@ section.tight { padding: 6rem 0; }
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .tech-orbit:active { cursor: grabbing; }
 
@@ -628,6 +650,11 @@ section.tight { padding: 6rem 0; }
   overflow: visible;
   padding-top: 4.5rem;
   padding-bottom: 5.5rem;
+}
+
+#about::before,
+#about::after {
+  display: none;
 }
 
 .about-grid-enhanced {
@@ -808,6 +835,7 @@ section.tight { padding: 6rem 0; }
   height: 32px;
   pointer-events: none;
   z-index: 10;
+  transform: rotate(130deg);
 }
 .id-spark-burst .spark {
   position: absolute;
@@ -825,7 +853,7 @@ section.tight { padding: 6rem 0; }
   width: 15px;
   height: 2.5px;
   top: 14px;
-  right: 0px;
+  right: 6px;
   transform: rotate(5deg);
 }
 .id-spark-burst .spark-3 {
@@ -836,71 +864,25 @@ section.tight { padding: 6rem 0; }
   transform: rotate(-30deg);
 }
 
-/* Dual V-shaped Lanyard Straps connecting to top boundary */
+/* Photorealistic Lanyard Ribbon hanging from top boundary */
 .lanyard-hang-system {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 5;
-  margin-bottom: -18px;
+  margin-bottom: -15px; /* hook loops into badge center slot */
   width: 100%;
 }
 
-.lanyard-v-straps {
-  position: relative;
-  width: 140px;
-  height: 95px;
-  display: flex;
-  justify-content: center;
-  overflow: visible;
-}
-
-.lanyard-strap {
-  position: absolute;
-  bottom: 0;
-  width: 32px;
-  height: 105px;
-  background: linear-gradient(180deg, #D9480F 0%, #FF6B00 60%, #FF7A00 100%);
-  border-left: 2px dashed rgba(255, 255, 255, 0.45);
-  border-right: 2px dashed rgba(255, 255, 255, 0.45);
-  box-shadow: 0 4px 16px rgba(255, 107, 0, 0.45), inset 2px 0 4px rgba(255, 255, 255, 0.2), inset -2px 0 4px rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lanyard-strap.strap-left {
-  left: 26px;
-  transform-origin: bottom right;
-  transform: rotate(-18deg);
-}
-
-.lanyard-strap.strap-right {
-  right: 26px;
-  transform-origin: bottom left;
-  transform: rotate(18deg);
-}
-
-.lanyard-strap .strap-text {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 0.88rem;
-  letter-spacing: 0.08em;
-  color: #FFFFFF;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  transform: rotate(-90deg);
-  user-select: none;
-}
-
-.lanyard-clip-wrap {
-  position: relative;
-  margin-top: -6px;
-  z-index: 6;
-}
-.lanyard-metal-clip {
+.lanyard-ribbon-img {
+  height: 190px;
+  width: auto;
+  object-fit: contain;
   display: block;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.35));
+  margin-top: -11px; /* connects straight to top section boundary */
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.38));
+  user-select: none;
+  pointer-events: none;
 }
 
 /* Card holder pouch */
@@ -1028,7 +1010,7 @@ section.tight { padding: 6rem 0; }
 /* Avatar Section & Waves with Fog Fade Transition */
 .id-avatar-section {
   position: relative;
-  height: 160px;
+  height: 190px;
   margin: 0 -1.6rem 0.5rem;
   display: flex;
   align-items: center;
@@ -1049,7 +1031,7 @@ section.tight { padding: 6rem 0; }
   bottom: -1px;
   left: 0;
   right: 0;
-  height: 65px;
+  height: 75px;
   pointer-events: none;
   z-index: 2;
 }
@@ -1074,12 +1056,12 @@ section.tight { padding: 6rem 0; }
   background: rgba(255, 107, 0, 0.45);
 }
 .id-dots-left {
-  left: 18px;
+  left: 12px;
   top: 48%;
   transform: translateY(-50%);
 }
 .id-dots-right {
-  right: 18px;
+  right: 12px;
   top: 48%;
   transform: translateY(-50%);
 }
@@ -1089,12 +1071,12 @@ section.tight { padding: 6rem 0; }
   z-index: 3;
 }
 .id-avatar-ring {
-  width: 128px;
-  height: 128px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
-  padding: 3.5px;
+  padding: 4px;
   background: linear-gradient(135deg, #FFA033 0%, #FF6B00 100%);
-  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.5);
+  box-shadow: 0 10px 32px rgba(255, 107, 0, 0.5);
 }
 .id-avatar-img {
   width: 100%;
@@ -3215,22 +3197,24 @@ section.tight { padding: 6rem 0; }
   }
   .tabs-bar {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.45rem;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
     width: 100%;
-    max-width: 440px;
+    max-width: 380px;
+    margin: 0 auto;
     border-radius: var(--radius-xl);
-    padding: 0.45rem;
+    padding: 0.55rem;
   }
   .tab-btn {
     width: 100%;
     justify-content: center;
     text-align: center;
-    padding: 0.72em 0.5em;
-    font-size: 0.8rem;
-    border-radius: var(--radius-md);
-    gap: 0.45em;
-    white-space: normal;
+    padding: 0.82em 1.2em;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    gap: 0.65em;
+    white-space: nowrap;
   }
   .cert-showcase-grid { grid-template-columns: 1fr; }
 }
