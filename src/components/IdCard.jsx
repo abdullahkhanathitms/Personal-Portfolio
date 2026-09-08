@@ -39,9 +39,13 @@ export default function IdCard() {
 
     // Total displacement from start
     const deltaX = e.clientX - startX.current
-    // Convert horizontal displacement into pendulum swing angle (degrees)
+    // In CSS rotate(deg), positive turns clockwise (bottom moves left),
+    // negative turns counter-clockwise (bottom moves right).
+    // Negating deltaX ensures:
+    // Dragging RIGHT (deltaX > 0) -> bottom swings RIGHT.
+    // Dragging LEFT (deltaX < 0) -> bottom swings LEFT.
     // Clamped gracefully between -30 and +30 degrees
-    const angle = Math.max(-30, Math.min(30, deltaX * 0.16))
+    const angle = Math.max(-30, Math.min(30, -deltaX * 0.16))
     rotationRaw.set(angle)
   }
 
@@ -54,8 +58,8 @@ export default function IdCard() {
       }
     } catch (_) {}
 
-    // Add inertia & overshoot based on release velocity
-    const releaseMomentum = Math.max(-12, Math.min(12, lastVelocity.current * 14))
+    // Add natural inertia & slight overshoot in the same direction of flick
+    const releaseMomentum = Math.max(-12, Math.min(12, -lastVelocity.current * 14))
     const currentAngle = rotationRaw.get()
     const overshootAngle = currentAngle + releaseMomentum
 

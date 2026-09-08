@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const LINKS = [
@@ -82,67 +83,71 @@ export default function Navbar({ toggleTheme }) {
         </div>
       </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <>
-            {/* Backdrop for closing when clicking outside */}
-            <motion.div
-              className="mobile-sidebar-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={closeMenu}
-              aria-hidden="true"
-            />
-
-            {/* Slide-in sidebar drawer */}
-            <motion.aside
-              className="mobile-sidebar-drawer"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 26, stiffness: 240 }}
-              aria-label="Mobile Navigation Drawer"
-            >
-              <div className="mobile-sidebar-header">
-                <a href="#home" className="logo" onClick={closeMenu}>
-                  AK<span>.</span>
-                </a>
-                <button
-                  className="mobile-sidebar-close-btn"
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {menuOpen && (
+              <>
+                {/* Backdrop for closing when clicking outside */}
+                <motion.div
+                  className="mobile-sidebar-backdrop"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
                   onClick={closeMenu}
-                  aria-label="Close menu"
+                  aria-hidden="true"
+                />
+
+                {/* Slide-in sidebar drawer */}
+                <motion.aside
+                  className="mobile-sidebar-drawer"
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ type: 'spring', damping: 26, stiffness: 240 }}
+                  aria-label="Mobile Navigation Drawer"
                 >
-                  <i className="fa-solid fa-xmark"></i>
-                </button>
-              </div>
-
-              <ul className="mobile-sidebar-links">
-                {LINKS.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      onClick={closeMenu}
-                      className={active === link.href ? 'active' : ''}
-                    >
-                      <span>{link.label}</span>
-                      <i className="fa-solid fa-chevron-right mobile-nav-arrow"></i>
+                  <div className="mobile-sidebar-header">
+                    <a href="#home" className="logo" onClick={closeMenu}>
+                      AK<span>.</span>
                     </a>
-                  </li>
-                ))}
-              </ul>
+                    <button
+                      className="mobile-sidebar-close-btn"
+                      onClick={closeMenu}
+                      aria-label="Close menu"
+                    >
+                      <i className="fa-solid fa-xmark"></i>
+                    </button>
+                  </div>
 
-              <div className="mobile-sidebar-footer">
-                <a href="#contact" className="btn btn-primary mobile-sidebar-cta" onClick={closeMenu}>
-                  <span>Let's Talk</span>
-                  <i className="fa-solid fa-paper-plane"></i>
-                </a>
-              </div>
-            </motion.aside>
-          </>
+                  <ul className="mobile-sidebar-links">
+                    {LINKS.map((link) => (
+                      <li key={link.href}>
+                        <a
+                          href={link.href}
+                          onClick={closeMenu}
+                          className={active === link.href ? 'active' : ''}
+                        >
+                          <span>{link.label}</span>
+                          <i className="fa-solid fa-chevron-right mobile-nav-arrow"></i>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mobile-sidebar-footer">
+                    <a href="#contact" className="btn btn-primary mobile-sidebar-cta" onClick={closeMenu}>
+                      <span>Let's Talk</span>
+                      <i className="fa-solid fa-paper-plane"></i>
+                    </a>
+                  </div>
+                </motion.aside>
+              </>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </nav>
   )
 }
