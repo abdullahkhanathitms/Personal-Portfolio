@@ -1,13 +1,81 @@
-import React from 'react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import React, { useRef, useState, useEffect } from 'react'
+import { motion, useMotionValue, useSpring, animate } from 'framer-motion'
 
 export default function IdCard() {
-  const x = useMotionValue(0)
-  // Derive realistic pendulum rotation from drag x offset around the top hook (e.g. max ~15deg)
-  const rotate = useTransform(x, [-100, 0, 100], [-14, 0, 14])
+  // Pure rotational pendulum physics around the fixed attachment point (top hook)
+  const rotationRaw = useMotionValue(0)
+  const rotation = useSpring(rotationRaw, {
+    stiffness: 140,
+    damping: 10,
+    mass: 1.1,
+  })
+
+  const isDragging = useRef(false)
+  const startX = useRef(0)
+  const cardRef = useRef(null)
+  const lastVelocity = useRef(0)
+  const lastX = useRef(0)
+  const lastTime = useRef(0)
+
+  const handlePointerDown = (e) => {
+    isDragging.current = true
+    startX.current = e.clientX
+    lastX.current = e.clientX
+    lastTime.current = performance.now()
+    lastVelocity.current = 0
+    if (e.target && e.target.setPointerCapture) {
+      e.target.setPointerCapture(e.pointerId)
+    }
+  }
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return
+    const now = performance.now()
+    const dt = Math.max(now - lastTime.current, 1)
+    const dxFromLast = e.clientX - lastX.current
+    lastVelocity.current = dxFromLast / dt // px per ms
+    lastX.current = e.clientX
+    lastTime.current = now
+
+    // Total displacement from start
+    const deltaX = e.clientX - startX.current
+    // Convert horizontal displacement into pendulum swing angle (degrees)
+    // Clamped gracefully between -30 and +30 degrees
+    const angle = Math.max(-30, Math.min(30, deltaX * 0.16))
+    rotationRaw.set(angle)
+  }
+
+  const handlePointerUp = (e) => {
+    if (!isDragging.current) return
+    isDragging.current = false
+    try {
+      if (e.target && e.target.releasePointerCapture) {
+        e.target.releasePointerCapture(e.pointerId)
+      }
+    } catch (_) {}
+
+    // Add inertia & overshoot based on release velocity
+    const releaseMomentum = Math.max(-12, Math.min(12, lastVelocity.current * 14))
+    const currentAngle = rotationRaw.get()
+    const overshootAngle = currentAngle + releaseMomentum
+
+    // First flick to overshoot target then natural spring back to 0
+    rotationRaw.set(overshootAngle)
+    setTimeout(() => {
+      rotationRaw.set(0)
+    }, 40)
+  }
 
   return (
     <div className="id-card-assembly">
+      {/* Mobile top supportive hanger rod so the card clearly appears hanging from a mount */}
+      <div className="mobile-hanger-mount" aria-hidden="true">
+        <span className="hanger-bracket bracket-left"></span>
+        <span className="hanger-rod"></span>
+        <span className="hanger-pin"></span>
+        <span className="hanger-bracket bracket-right"></span>
+      </div>
+
       {/* Decorative 'That's Me!' annotation pointing to the card */}
       <div className="thats-me-annotation" aria-hidden="true">
         <span>That's Me!</span>
@@ -35,7 +103,7 @@ export default function IdCard() {
         <span className="spark spark-3"></span>
       </div>
 
-      {/* Lanyard assembly: Authentic photorealistic hanging ribbon with AK. branding & metal hook */}
+      {/* FIXED TOP ATTACHMENT POINT: Ribbon and Lobster Clasp never move */}
       <div className="lanyard-hang-system">
         <img
           src="/lanyard-ribbon.png"
@@ -44,26 +112,19 @@ export default function IdCard() {
         />
       </div>
 
-      {/* Main ID Card Plastic Badge Holder - Interactively draggable with pendulum swing physics */}
+      {/* SWINGING ID CARD HOLDER: Swings strictly around fixed top attachment point */}
       <motion.div
-        className="id-card-holder"
-        drag="x"
-        dragConstraints={{ left: -50, right: 50 }}
-        dragElastic={0.25}
-        dragSnapToOrigin
+        ref={cardRef}
+        className="id-card-holder id-card-interactive-swing"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
         style={{
-          x,
-          rotate,
-          transformOrigin: 'top center',
+          rotate: rotation,
+          transformOrigin: '50% 19px', // exactly at the top center slot loop
           cursor: 'grab',
-          touchAction: 'pan-y',
-        }}
-        whileDrag={{ cursor: 'grabbing' }}
-        transition={{
-          type: 'spring',
-          stiffness: 260,
-          damping: 18,
-          mass: 0.8,
+          touchAction: 'none',
         }}
       >
         {/* Transparent top pouch header with 3 die-cut slots */}
