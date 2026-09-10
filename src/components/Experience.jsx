@@ -15,13 +15,13 @@ const EXPERIENCE = [
   },
   {
     company: 'CodeAlpha',
-    role: 'Node.js & Backend Development Intern',
-    date: '1 Month Internship',
-    badge: 'Internship',
+    role: 'Full-Stack Developer Intern (Virtual)',
+    date: 'Aug 2026 – Sep 2026',
+    badge: 'Virtual Internship (1 Month)',
     points: [
-      'Engineered backend REST APIs using Node.js, Express.js, and MongoDB database architecture.',
-      'Developed ShopCo eCommerce REST API backend handling products, users, and order workflows.',
-      'Built a Mini Social Media Platform featuring user profiles, posts, comments, likes, and follower systems with HTML, CSS, JavaScript frontend and Express.js backend.',
+      'Engineered full-stack web application modules, implementing dynamic front-end components and robust back-end RESTful API endpoints.',
+      'Developed responsive, cross-browser compatible user interfaces and integrated secure server-side database workflows with Node.js & MongoDB.',
+      'Successfully fulfilled all program requirements, earning an official Certificate of Completion and Letter of Recommendation (LOR).',
     ],
   },
   {

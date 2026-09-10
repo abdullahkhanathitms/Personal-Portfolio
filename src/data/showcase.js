@@ -191,11 +191,21 @@ export const CERTIFICATES = [
   },
   {
     id: 'cert-seo-squarespace',
-    title: 'Search Engine Optimization (SEO) with Squarespace',
+    title: 'Search Engine Optimization (SEO)',
     issuer: 'Coursera',
     date: 'Aug 16, 2026',
     image: '/seo-squarespace-cert.png',
     credentialUrl: 'https://coursera.org/verify/C9M6CUYMD5C1',
+  },
+  {
+    id: 'cert-codealpha',
+    title: 'Certificate of Completion — Full Stack Development',
+    issuer: 'CodeAlpha',
+    date: '10 Sept 2026',
+    image: '/codealpha-cert.png',
+    credentialUrl: 'https://www.codealpha.tech',
+    description:
+      'Official Certificate of Completion recognizing the successful completion of the CodeAlpha Virtual Internship Program in Full Stack Development (10th August 2026 to 10th September 2026). Student ID: CA/DF1/234820.',
   },
   {
     id: 'cert-web-design',
@@ -218,5 +228,15 @@ export const LOR_ITEMS = [
     type: 'Official Recommendation & Experience Certificate',
     description:
       'Official Certificate of Performance & Letter of Recommendation from Brixq recognizing 2 years (11 July 2024 – 11 July 2026) of custom WordPress and Shopify development.',
+  },
+  {
+    id: 'lor-codealpha',
+    title: 'Letter of Recommendation — Full Stack Development Internship',
+    issuer: 'CodeAlpha',
+    date: '10 Sept 2026',
+    image: '/codealpha-lor.jpg',
+    type: 'Official Letter of Recommendation',
+    description:
+      'Official Letter of Recommendation from CodeAlpha for the Virtual Internship Program in Full Stack Development (10th August 2026 to 10th September 2026). Student ID: CA/DF1/234820.',
   },
 ]

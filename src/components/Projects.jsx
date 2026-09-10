@@ -214,7 +214,7 @@ function CertificatesPanel({ onSelect }) {
 function LorPanel({ onSelect }) {
   return (
     <motion.div {...panelMotion}>
-      <div className="cert-showcase-grid">
+      <div className="cert-showcase-grid lor-showcase-grid">
         {LOR_ITEMS.map((lor, i) => (
           <Reveal key={lor.id} delay={i * 0.08}>
             <ImageCertCard item={lor} onSelect={onSelect} />
