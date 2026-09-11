@@ -4,8 +4,10 @@ const EXPERIENCE = [
   {
     company: 'Brixq Software House',
     role: 'Web Development Intern',
-    date: 'July 2023 – July 2024',
+    date: 'Jul 2023 – Jul 2024',
     badge: 'Internship (1 Year)',
+    logoType: 'letter',
+    logoLetter: 'B',
     points: [
       'Completed a 1-year intensive web development internship mastering frontend & CMS development.',
       'Created personal portfolio site on WordPress and built 30+ responsive websites and eCommerce stores.',
@@ -17,7 +19,9 @@ const EXPERIENCE = [
     company: 'CodeAlpha',
     role: 'Full-Stack Developer Intern (Virtual)',
     date: 'Aug 2026 – Sep 2026',
-    badge: 'Virtual Internship (1 Month)',
+    badge: 'Internship',
+    logoType: 'icon',
+    logoIcon: 'fa-solid fa-code',
     points: [
       'Engineered full-stack web application modules, implementing dynamic front-end components and robust back-end RESTful API endpoints.',
       'Developed responsive, cross-browser compatible user interfaces and integrated secure server-side database workflows with Node.js & MongoDB.',
@@ -27,8 +31,10 @@ const EXPERIENCE = [
   {
     company: 'Brixq Software House',
     role: 'WordPress Custom Development & Shopify Developer',
-    date: 'July 2024 – July 2026',
+    date: 'Jul 2024 – Jul 2026',
     badge: 'Full-Time (2 Years)',
+    logoType: 'icon',
+    logoIcon: 'fa-brands fa-wordpress',
     points: [
       'Engineered high-converting Singapore real estate websites with saved-property lead capture architectures.',
       'Built custom WordPress, Webflow, Shopify, and WooCommerce platforms for international clients using Elementor Pro.',
@@ -41,22 +47,26 @@ const EXPERIENCE = [
 const EDUCATION = [
   {
     school: 'Urwa Islamic School',
-    program: 'Matriculation (Secondary Science Education) — 2018 – 2020',
+    program: 'Matriculation (Secondary Science Education)',
+    year: '2018 – 2020',
     icon: 'fa-solid fa-school',
   },
   {
     school: 'Media Production Art',
-    program: 'Web Development Course — 2020',
-    icon: 'fa-solid fa-laptop-code',
+    program: 'Web Development Course',
+    year: '2020',
+    icon: 'fa-solid fa-video',
   },
   {
     school: 'Degree College Hyderabad',
-    program: 'Intermediate, Pre-Engineering — 2020 – 2022',
+    program: 'Intermediate, Pre-Engineering',
+    year: '2020 – 2022',
     icon: 'fa-solid fa-building-columns',
   },
   {
     school: 'Hyderabad Institute for Technology & Management Sciences',
-    program: 'BS Software Engineering — 2025 – Present',
+    program: 'BS Software Engineering',
+    year: '2025 – Present',
     icon: 'fa-solid fa-graduation-cap',
   },
 ]
@@ -89,19 +99,34 @@ export default function Experience() {
                   className="timeline-card-wrapper"
                 >
                   <div className="timeline-card glass">
-                    <div className="timeline-header">
-                      <div className="timeline-company-wrap">
-                        <h3>{exp.company}</h3>
-                        <span className="timeline-date">{exp.date}</span>
+                    {/* Top Header: Squircle Logo + Company/Date + Pill Badge */}
+                    <div className="timeline-card-header">
+                      <div className="timeline-brand-group">
+                        <div className="company-logo-squircle">
+                          {exp.logoType === 'letter' ? (
+                            <span className="company-logo-letter">{exp.logoLetter}</span>
+                          ) : (
+                            <i className={exp.logoIcon}></i>
+                          )}
+                        </div>
+                        <div className="timeline-company-wrap">
+                          <h3>{exp.company}</h3>
+                          <span className="timeline-date">{exp.date}</span>
+                        </div>
                       </div>
                       {exp.badge && <span className="exp-badge">{exp.badge}</span>}
                     </div>
 
                     <h4 className="timeline-role-title">{exp.role}</h4>
 
-                    <ul>
+                    <ul className="timeline-points-list">
                       {exp.points.map((p) => (
-                        <li key={p}>{p}</li>
+                        <li key={p}>
+                          <span className="point-bullet-icon" aria-hidden="true">
+                            <i className="fa-solid fa-circle-check"></i>
+                          </span>
+                          <span className="point-text">{p}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -112,16 +137,29 @@ export default function Experience() {
         </div>
 
         <Reveal className="education-block" as="div">
-          <h3 className="education-heading">Education</h3>
+          <div className="section-header center education-header">
+            <div className="eyebrow" style={{ justifyContent: 'center' }}>Academic Background</div>
+            <h3 className="education-heading">Education</h3>
+          </div>
           <div className="education-grid">
-            {EDUCATION.map((ed) => (
-              <div className="education-card glass" key={ed.school}>
-                <i className={ed.icon || 'fa-solid fa-graduation-cap'}></i>
-                <div>
-                  <h4>{ed.school}</h4>
-                  <p>{ed.program}</p>
+            {EDUCATION.map((ed, i) => (
+              <Reveal key={ed.school} delay={i * 0.08} className="education-card-wrap">
+                <div className="education-card glass">
+                  <div className="education-card-top">
+                    <div className="edu-icon-squircle">
+                      <i className={ed.icon || 'fa-solid fa-graduation-cap'}></i>
+                    </div>
+                  </div>
+                  <div className="education-card-content">
+                    <h4 className="edu-school-name">{ed.school}</h4>
+                    <p className="edu-program">{ed.program}</p>
+                    <span className="edu-year">{ed.year}</span>
+                  </div>
+                  <div className="edu-action-btn" aria-hidden="true">
+                    <i className="fa-solid fa-arrow-right"></i>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </Reveal>
