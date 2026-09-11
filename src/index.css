@@ -2992,9 +2992,9 @@ section.tight { padding: 6rem 0; }
   }
   .timeline-card-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-start;
-    gap: 0.65rem;
+    gap: 1rem;
     margin-bottom: 0.75rem;
   }
   .timeline-brand-group {
